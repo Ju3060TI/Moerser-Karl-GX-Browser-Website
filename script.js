@@ -1,4 +1,4 @@
-// PROXY wird in browser.html definiert 
+// PROXY wird in browser.html definiert
 let tabs = [];
 let activeTabId = null;
 let tabCounter = 0;
@@ -22,8 +22,7 @@ function togglePopup(popupId) {
     }
 }
 
-// Popup-Buttons verbinden
-['gamesBtn','kiBtn','toolsBtn','mediaBtn'].forEach(btnId => {
+['gamesBtn','socialBtn','streamingBtn','kiBtn','toolsBtn'].forEach(btnId => {
     const btn = document.getElementById(btnId);
     if (btn) {
         const popupId = btnId.replace('Btn','Popup');
@@ -31,7 +30,6 @@ function togglePopup(popupId) {
     }
 });
 
-// Klick außerhalb schließt Popups
 document.addEventListener('click', e => {
     document.querySelectorAll('.popup').forEach(p => {
         const btnId = p.id.replace('Popup','Btn');
@@ -41,31 +39,26 @@ document.addEventListener('click', e => {
 });
 
 // === TABS ===
-function addTab(url, title) {
+window.addTab = function(url, title) {
     tabCounter++;
     const tabId = 'tab-' + tabCounter;
     tabs.push({ id: tabId, url, title });
-
     if (startPage) startPage.classList.add('hidden');
-
     const tabEl = document.createElement('div');
     tabEl.className = 'tab';
     tabEl.id = 'tab-el-' + tabId;
-    tabEl.innerHTML = `<span>${title}</span><span class="tab-close" data-tabid="${tabId}">✕</span>`;
-    tabEl.addEventListener('click', e => { if (!e.target.classList.contains('tab-close')) switchTab(tabId); });
+    tabEl.innerHTML = '<span>' + title + '</span><span class="tab-close" data-tabid="' + tabId + '">✕</span>';
+    tabEl.addEventListener('click', function(e) { if (!e.target.classList.contains('tab-close')) switchTab(tabId); });
     tabsContainer.appendChild(tabEl);
-
     const frame = document.createElement('iframe');
     frame.className = 'tab-frame';
     frame.id = 'frame-' + tabId;
     frame.src = url;
     framesContainer.appendChild(frame);
-
-    tabEl.querySelector('.tab-close').addEventListener('click', e => { e.stopPropagation(); closeTab(tabId); });
-
+    tabEl.querySelector('.tab-close').addEventListener('click', function(e) { e.stopPropagation(); closeTab(tabId); });
     switchTab(tabId);
     updateTabCount();
-}
+};
 
 function switchTab(tabId) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -138,6 +131,9 @@ const seiten = {
     'tiktok': 'https://www.tiktok.com/',
     'instagram': 'https://www.instagram.com/',
     'reddit': 'https://www.reddit.com/',
+    'twitter': 'https://www.twitter.com/',
+    'snapchat': 'https://www.snapchat.com/',
+    'twitch': 'https://www.twitch.tv/',
 };
 
 function feuern() {
@@ -153,12 +149,16 @@ function feuern() {
     
     const needsProxy = ['youtube.com','discord.com','twitch.tv','chat.openai.com','claude.ai',
         'chat.deepseek.com','grok.x.ai','netflix.com','disneyplus.com','crunchyroll.com',
-        'tiktok.com','instagram.com','reddit.com','1v1.lol','desertorder.com',
-        'subwaysurfers.com','geometrydash.io','krunker.io','shellshockers.io','slope.game',
-        'perplexity.ai','gemini.google.com','copilot.microsoft.com','canva.com'].some(d => url.includes(d));
+        'tiktok.com','instagram.com','reddit.com','twitter.com','snapchat.com',
+        '1v1.lol','desertorder.com','subwaysurfers.com','geometrydash.io',
+        'krunker.io','shellshockers.io','slope.game','perplexity.ai',
+        'gemini.google.com','copilot.microsoft.com','canva.com'].some(d => url.includes(d));
     
-    const finalUrl = needsProxy ? PROXY + encodeURIComponent(url) : url;
-    addTab(finalUrl, lower.length > 20 ? lower.substring(0, 20) + '...' : lower);
+    if (needsProxy) {
+        addTab(PROXY + url, lower.length > 20 ? lower.substring(0, 20) + '...' : lower);
+    } else {
+        addTab(url, lower.length > 20 ? lower.substring(0, 20) + '...' : lower);
+    }
 }
 
 feuerBtn.addEventListener('click', feuern);
