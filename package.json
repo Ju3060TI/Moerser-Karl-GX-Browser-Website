@@ -1,0 +1,8 @@
+{
+  "name": "schulhelfer",
+  "version": "1.0.0",
+  "description": "Schulhelfer 2.0",
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
