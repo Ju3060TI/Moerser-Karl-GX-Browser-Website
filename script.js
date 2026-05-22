@@ -1,4 +1,4 @@
-// PROXY wird in browser.html definiert
+const PROXY = '/.netlify/functions/proxy?url=';
 let tabs = [];
 let activeTabId = null;
 let tabCounter = 0;
