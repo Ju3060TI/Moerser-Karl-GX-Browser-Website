@@ -5,233 +5,96 @@
     <title>404 Not Found</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{
-            font-family:Arial,sans-serif;
-            background:#f5f5f5;
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            user-select:none;
-        }
-        /* 404 Seite */
+        body{font-family:Arial,sans-serif;background:#f5f5f5;height:100vh;display:flex;justify-content:center;align-items:center;user-select:none}
+        .hidden{display:none}
+        
+        /* 404 */
         .error-box{text-align:center;color:#333}
         .error-code{font-size:120px;font-weight:bold;color:#c00;text-shadow:2px 2px 4px rgba(0,0,0,.2)}
         .error-text{font-size:24px;margin:10px 0}
         .error-sub{font-size:14px;color:#666}
-        .dot{
-            display:inline-block;width:8px;height:8px;
-            background:#c00;border-radius:50%;margin:0 2px;
-            animation:blink 1.5s infinite;cursor:pointer;
-        }
+        .dot{display:inline-block;width:8px;height:8px;background:#c00;border-radius:50%;margin:0 2px;animation:blink 1.5s infinite;cursor:pointer}
         .dot:nth-child(2){animation-delay:.2s}
         .dot:nth-child(3){animation-delay:.4s}
         @keyframes blink{0%,100%{opacity:.2}50%{opacity:1}}
         .hint{font-size:10px;color:#999;margin-top:30px}
         
-        /* Fach-Auswahl (versteckt) */
-        .hidden{display:none}
-        .container{
-            text-align:center;
-            background:#fff;
-            padding:40px;
-            border-radius:15px;
-            box-shadow:0 5px 30px rgba(0,0,0,.1);
-            max-width:550px;
-            width:90%;
-        }
+        /* Fach-Auswahl */
+        .container{text-align:center;background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 30px rgba(0,0,0,.1);max-width:550px;width:90%}
         h1{color:#333;margin-bottom:5px;font-size:24px}
         .subtitle{color:#666;margin-bottom:20px;font-size:13px}
-        select{
-            width:100%;padding:12px;border:2px solid #ddd;
-            border-radius:8px;font-size:16px;margin-bottom:15px;
-            cursor:pointer;background:#fff;
+        .fach-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px;text-align:left}
+        .fach-btn{
+            padding:12px;border:2px solid #ddd;border-radius:8px;
+            cursor:pointer;font-size:14px;background:#fff;transition:all .2s;
+            display:flex;align-items:center;gap:8px;
         }
-        select:focus{outline:none;border-color:#4a90d9;}
-        .info-box{
-            background:#fff3cd;padding:12px;border-radius:8px;
-            font-size:13px;color:#856404;margin-bottom:15px;
-            text-align:left;min-height:40px;border:1px solid #ffc107;
-        }
-        .link-box{
-            background:#e8f5e9;padding:15px;border-radius:8px;
-            word-break:break-all;font-size:14px;color:#333;
-            margin-bottom:15px;text-align:left;min-height:50px;
-            border:2px solid #4caf50;
-        }
-        .link-box a{color:#2e7d32;text-decoration:none;font-weight:bold;}
-        button{
-            padding:12px 25px;border:none;border-radius:8px;
-            font-size:15px;cursor:pointer;transition:all .3s;
-            margin:5px;font-weight:bold;
-        }
-        .copy-btn{background:#28a745;color:#fff;}
-        .copy-btn:hover{background:#218838;transform:scale(1.02);}
-        .open-btn{background:#1565c0;color:#fff;}
-        .open-btn:hover{background:#0d47a1;transform:scale(1.02);}
+        .fach-btn:hover{background:#e8f5e9;border-color:#4caf50;transform:scale(1.02)}
+        .fach-btn:active{background:#c8e6c9}
+        .info-box{background:#e8f5e9;padding:12px;border-radius:8px;font-size:13px;color:#2e7d32;margin:15px 0;text-align:center;min-height:40px;border:2px solid #4caf50}
         .note{font-size:10px;color:#bbb;margin-top:15px}
-        .back-btn{
-            background:#666;color:#fff;font-size:12px;
-            padding:8px 15px;margin-top:10px;
-        }
-        .back-btn:hover{background:#444;}
     </style>
 </head>
 <body>
-    <!-- 404 TARNSEITE -->
+    <!-- 404 -->
     <div id="tarnung">
         <div class="error-box">
             <div class="error-code">404</div>
-            <div class="error-text">
-                Seite nicht gefunden
-                <span class="dot" id="d1"></span>
-                <span class="dot" id="d2"></span>
-                <span class="dot" id="d3"></span>
-            </div>
+            <div class="error-text">Seite nicht gefunden<span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div>
             <div class="error-sub">Die angeforderte URL wurde nicht gefunden.</div>
             <p class="hint">nginx/1.24.0</p>
         </div>
     </div>
     
-    <!-- FACH-AUSWAHL (versteckt) -->
-    <div id="fachAuswahl" class="container hidden">
-        <h1>📚 Schulhelfer 2.0</h1>
-        <p class="subtitle">Lernmaterial & Hilfsmittel</p>
-        
-        <select id="fachSelect" onchange="updateLink()">
-            <option value="">-- Fach auswählen --</option>
-            <option value="Mathe-Calculator">📐 Mathe - Calculator</option>
-            <option value="Deutsch-Grammatik">📝 Deutsch - Grammatik Erklärer</option>
-            <option value="Englisch-Vokabeln">🇬🇧 Englisch - Vokabel Trainer</option>
-            <option value="Geschichte-Lexikon">🏛️ Geschichte - Lexikon</option>
-            <option value="Informatik">💻 Informatik</option>
-            <option value="Biologie-Lexikon">🧬 Biologie - Lexikon</option>
-            <option value="Kunst-Gestaltung">🎨 Kunst und Gestaltung</option>
-            <option value="Geometrische-Zeichenvorlagen">📐 GZ - Geometrische Zeichenvorlagen</option>
-            <option value="Kochrezepte">🍳 EHH - Kochrezepte</option>
-            <option value="DGB-Lexikon">🤝 DGB - Lexikon</option>
-            <option value="Soziales-Zusammenleben">🫂 Soz - Soziales Zusammenleben</option>
-        </select>
-        
-        <div class="info-box" id="infoBox">
-            <span style="color:#999">Info: Wähle ein Fach um den Link zu sehen</span>
+    <!-- Fach-Auswahl -->
+    <div id="fachAuswahl" class="hidden">
+        <div class="container">
+            <h1>📚 Schulhelfer 2.0</h1>
+            <p class="subtitle">Wähle dein Fach:</p>
+            
+            <div class="fach-grid">
+                <div class="fach-btn" onclick="openFach('Mathe-Calculator')">📐 Mathe</div>
+                <div class="fach-btn" onclick="openFach('Deutsch-Grammatik')">📝 Deutsch</div>
+                <div class="fach-btn" onclick="openFach('Englisch-Vokabeln')">🇬🇧 Englisch</div>
+                <div class="fach-btn" onclick="openFach('Geschichte-Lexikon')">🏛️ Geschichte</div>
+                <div class="fach-btn" onclick="openFach('Informatik')">💻 Informatik</div>
+                <div class="fach-btn" onclick="openFach('Biologie-Lexikon')">🧬 Biologie</div>
+                <div class="fach-btn" onclick="openFach('Kunst-Gestaltung')">🎨 Kunst</div>
+                <div class="fach-btn" onclick="openFach('Geometrische-Zeichenvorlagen')">📐 GZ</div>
+                <div class="fach-btn" onclick="openFach('Kochrezepte')">🍳 EHH</div>
+                <div class="fach-btn" onclick="openFach('DGB-Lexikon')">🤝 DGB</div>
+                <div class="fach-btn" onclick="openFach('Soziales-Zusammenleben')">🫂 Soz</div>
+            </div>
+            
+            <div class="info-box" id="infoBox">👆 Klick auf ein Fach um es zu öffnen</div>
+            <p class="note">© 2024 Schulhelfer 2.0</p>
         </div>
-        
-        <div class="link-box" id="linkDisplay">
-            <span style="color:#999">Link erscheint hier...</span>
-        </div>
-        
-        <button class="copy-btn" onclick="copyLink()">📋 Kopieren</button>
-        <button class="open-btn" onclick="openLink()">🔗 Öffnen</button>
-        <br>
-        <button class="back-btn" onclick="zurueckZurTarnung()">⬅ Zurück</button>
-        
-        <p class="note">© 2024 Schulhelfer 2.0</p>
     </div>
 
     <script>
-        // ⚠️ DEINEN NETLIFY-NAMEN HIER EINTRAGEN!
         const NETLIFY_URL = 'https://schulhelfer2-0.netlify.app';
-        let currentLink = '';
         
-        const fachInfo = {
-            'Mathe-Calculator': '📐 Taschenrechner & Formelsammlung',
-            'Deutsch-Grammatik': '📝 Grammatik erklärt mit Beispielen',
-            'Englisch-Vokabeln': '🇬🇧 Vokabeln lernen & üben',
-            'Geschichte-Lexikon': '🏛️ Historische Ereignisse & Daten',
-            'Informatik': '💻 Programmierhilfe & Tutorials',
-            'Biologie-Lexikon': '🧬 Biologische Prozesse & Erklärungen',
-            'Kunst-Gestaltung': '🎨 Kunsttheorie & Gestaltungstipps',
-            'Geometrische-Zeichenvorlagen': '📐 Zeichenvorlagen für Geometrie',
-            'Kochrezepte': '🍳 Leckere Rezepte & Kochanleitungen',
-            'DGB-Lexikon': '🤝 Demokratie, Gesellschaft, Bildung',
-            'Soziales-Zusammenleben': '🫂 Regeln & Tipps fürs Zusammenleben'
-        };
-        
-        // === GEHEIMZUGANG: 5x auf Punkte klicken ===
+        // === GEHEIMZUGANG ===
         let clicks = 0;
-        document.querySelectorAll('.dot').forEach(function(d) {
-            d.addEventListener('click', function(e) {
-                e.stopPropagation();
-                clicks++;
-                if (clicks >= 5) {
-                    showFachAuswahl();
-                }
-            });
-        });
+        document.getElementById('d1').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
+        document.getElementById('d2').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
+        document.getElementById('d3').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
         
-        // Konami-Code
-        let k = [];
-        document.addEventListener('keydown', function(e) {
-            k.push(e.key); k = k.slice(-8);
-            if (k.join(',') === 'ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight') {
-                showFachAuswahl();
-            }
-        });
+        let k=[];
+        document.addEventListener('keydown',function(e){k.push(e.key);k=k.slice(-8);if(k.join(',')==='ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight')showAuswahl()});
         
-        // "moerser" tippen
-        let w = '';
-        document.addEventListener('keypress', function(e) {
-            w += e.key.toLowerCase();
-            if (w.includes('moerser')) { w = ''; showFachAuswahl(); }
-            if (w.length > 20) w = w.slice(-10);
-        });
+        let w='';
+        document.addEventListener('keypress',function(e){w+=e.key.toLowerCase();if(w.includes('moerser')){w='';showAuswahl()}if(w.length>20)w=w.slice(-10)});
         
-        function showFachAuswahl() {
+        function showAuswahl(){
             document.getElementById('tarnung').classList.add('hidden');
             document.getElementById('fachAuswahl').classList.remove('hidden');
-            document.body.style.background = '#e8e8e8';
         }
         
-        function zurueckZurTarnung() {
-            document.getElementById('fachAuswahl').classList.add('hidden');
-            document.getElementById('tarnung').classList.remove('hidden');
-            document.body.style.background = '#f5f5f5';
-            currentLink = '';
-            document.getElementById('fachSelect').value = '';
-            document.getElementById('linkDisplay').innerHTML = '<span style="color:#999">Link erscheint hier...</span>';
-            document.getElementById('infoBox').innerHTML = '<span style="color:#999">Info: Wähle ein Fach um den Link zu sehen</span>';
-        }
-        
-        function updateLink() {
-            const fach = document.getElementById('fachSelect').value;
-            const display = document.getElementById('linkDisplay');
-            const infoBox = document.getElementById('infoBox');
-            
-            if (!fach) {
-                display.innerHTML = '<span style="color:#999">Link erscheint hier...</span>';
-                infoBox.innerHTML = '<span style="color:#999">Info: Wähle ein Fach um den Link zu sehen</span>';
-                currentLink = '';
-                return;
-            }
-            
-            currentLink = NETLIFY_URL + '/' + fach;
-            
-            if (fachInfo[fach]) {
-                infoBox.innerHTML = '<strong>📌 ' + fach.replace(/-/g, ' ') + ':</strong><br>' + fachInfo[fach];
-            }
-            
-            display.innerHTML = '<strong>🔗 Link:</strong><br><a href="' + currentLink + '" target="_blank">' + currentLink + '</a>';
-        }
-        
-        function copyLink() {
-            if (!currentLink) {
-                alert('⚠️ Bitte zuerst ein Fach auswählen!');
-                return;
-            }
-            navigator.clipboard.writeText(currentLink).then(function() {
-                alert('📋 Link kopiert!\n\n' + currentLink);
-            }).catch(function() {
-                prompt('📋 Link (manuell kopieren):', currentLink);
-            });
-        }
-        
-        function openLink() {
-            if (!currentLink) {
-                alert('⚠️ Bitte zuerst ein Fach auswählen!');
-                return;
-            }
-            window.open(currentLink, '_blank');
+        function openFach(fach){
+            document.getElementById('infoBox').innerHTML='✅ Öffne ' + fach.replace(/-/g,' ') + '...';
+            // Leitet über _redirects zum Browser weiter
+            window.location.href = NETLIFY_URL + '/' + fach;
         }
     </script>
 </body>
