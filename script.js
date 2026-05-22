@@ -11,13 +11,6 @@ const tabCountEl = document.getElementById('tabCount');
 const startPage = document.getElementById('startPage');
 
 // === POPUPS ===
-const popupBtns = {
-    gamesBtn: 'gamesPopup',
-    kiBtn: 'kiPopup',
-    toolsBtn: 'toolsPopup',
-    mediaBtn: 'mediaPopup'
-};
-
 function togglePopup(popupId) {
     const popup = document.getElementById(popupId);
     if (!popup) return;
@@ -29,19 +22,21 @@ function togglePopup(popupId) {
     }
 }
 
-Object.entries(popupBtns).forEach(([btnId, popupId]) => {
+// Popup-Buttons verbinden
+['gamesBtn','kiBtn','toolsBtn','mediaBtn'].forEach(btnId => {
     const btn = document.getElementById(btnId);
-    const popup = document.getElementById(popupId);
-    if (btn) btn.addEventListener('click', (e) => { e.stopPropagation(); togglePopup(popupId); });
+    if (btn) {
+        const popupId = btnId.replace('Btn','Popup');
+        btn.addEventListener('click', e => { e.stopPropagation(); togglePopup(popupId); });
+    }
 });
 
-document.addEventListener('click', (e) => {
-    Object.entries(popupBtns).forEach(([btnId, popupId]) => {
+// Klick außerhalb schließt Popups
+document.addEventListener('click', e => {
+    document.querySelectorAll('.popup').forEach(p => {
+        const btnId = p.id.replace('Popup','Btn');
         const btn = document.getElementById(btnId);
-        const popup = document.getElementById(popupId);
-        if (popup && !popup.contains(e.target) && e.target !== btn) {
-            popup.classList.remove('show');
-        }
+        if (!p.contains(e.target) && e.target !== btn) p.classList.remove('show');
     });
 });
 
@@ -57,7 +52,7 @@ function addTab(url, title) {
     tabEl.className = 'tab';
     tabEl.id = 'tab-el-' + tabId;
     tabEl.innerHTML = `<span>${title}</span><span class="tab-close" data-tabid="${tabId}">✕</span>`;
-    tabEl.addEventListener('click', (e) => { if (!e.target.classList.contains('tab-close')) switchTab(tabId); });
+    tabEl.addEventListener('click', e => { if (!e.target.classList.contains('tab-close')) switchTab(tabId); });
     tabsContainer.appendChild(tabEl);
 
     const frame = document.createElement('iframe');
@@ -66,7 +61,7 @@ function addTab(url, title) {
     frame.src = url;
     framesContainer.appendChild(frame);
 
-    tabEl.querySelector('.tab-close').addEventListener('click', (e) => { e.stopPropagation(); closeTab(tabId); });
+    tabEl.querySelector('.tab-close').addEventListener('click', e => { e.stopPropagation(); closeTab(tabId); });
 
     switchTab(tabId);
     updateTabCount();
@@ -78,7 +73,7 @@ function switchTab(tabId) {
     const tabEl = document.getElementById('tab-el-' + tabId);
     const frame = document.getElementById('frame-' + tabId);
     if (tabEl) tabEl.classList.add('active');
-    if (frame) { frame.classList.add('active'); urlInput.value = frame.src.replace(PROXY, ''); }
+    if (frame) { frame.classList.add('active'); urlInput.value = frame.src.replace(PROXY, '').replace('about:blank', ''); }
     activeTabId = tabId;
     if (startPage) startPage.classList.add('hidden');
 }
@@ -156,7 +151,6 @@ function feuern() {
         url = eingabe;
     } else url = 'https://www.google.com/search?q=' + encodeURIComponent(eingabe);
     
-    // Entscheide ob Proxy nötig
     const needsProxy = ['youtube.com','discord.com','twitch.tv','chat.openai.com','claude.ai',
         'chat.deepseek.com','grok.x.ai','netflix.com','disneyplus.com','crunchyroll.com',
         'tiktok.com','instagram.com','reddit.com','1v1.lol','desertorder.com',
@@ -168,4 +162,4 @@ function feuern() {
 }
 
 feuerBtn.addEventListener('click', feuern);
-urlInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') feuern(); });
+urlInput.addEventListener('keypress', e => { if (e.key === 'Enter') feuern(); });
