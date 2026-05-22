@@ -1,25 +1,17 @@
-const axios = require('axios');
-
 exports.handler = async (event) => {
     const url = event.queryStringParameters.url;
     if (!url) return { statusCode: 400, body: 'Keine URL' };
 
     try {
-        const response = await axios.get(url, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-            },
-            responseType: 'text',
-            maxRedirects: 5,
-            timeout: 15000
+        const response = await fetch(url, {
+            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+            redirect: 'follow'
         });
-
+        const body = await response.text();
         return {
             statusCode: 200,
-            headers: {
-                'content-type': 'text/html; charset=utf-8'
-            },
-            body: response.data
+            headers: { 'content-type': 'text/html; charset=utf-8' },
+            body: body
         };
     } catch (e) {
         return {
