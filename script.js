@@ -1,4 +1,5 @@
-// PROXY wird in browser.html definiertlet tabs = [];
+// PROXY wird in browser.html definiert 
+let tabs = [];
 let activeTabId = null;
 let tabCounter = 0;
 
