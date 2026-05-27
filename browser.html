@@ -89,16 +89,25 @@
             </div>
         </div>
         <div id="statusBar">
-            <div class="status-item"><span class="status-dot"></span> Cloudflare</div>
+            <div class="status-item"><span class="status-dot"></span> Geschützt</div>
             <div class="status-item">🔒 Proxy aktiv</div>
             <div class="status-item" id="tabCount">0 Tabs</div>
         </div>
     </div>
 
     <script>
-        // === GEHEIME URL (Basis64 verschleiert) ===
-        const _b = 'bW9lcnNlcmthcmxneC5qdWxpYW4taWxpbi53b3JrZXJzLmRldg==';
-        const PROXY = 'https://' + atob(_b) + '/?url=';
+        // Lädt die Proxy-URL aus externer Konfiguration
+        async function initProxy() {
+            try {
+                const response = await fetch('./config.json');
+                const config = await response.json();
+                window.PROXY = config.proxyUrl + '/?url=';
+                console.log('Proxy initialisiert');
+            } catch(e) {
+                console.error('Proxy-Konfiguration konnte nicht geladen werden.');
+            }
+        }
+        initProxy();
     </script>
     <script src="script.js"></script>
 </body>
