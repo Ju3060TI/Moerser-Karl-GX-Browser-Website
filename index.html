@@ -84,21 +84,15 @@
         let w='';
         document.addEventListener('keypress',function(e){w+=e.key.toLowerCase();if(w.includes('moerser')){w='';showAuswahl()}if(w.length>20)w=w.slice(-10)});
         
-        async function showAuswahl(){
+        function showAuswahl(){
             document.getElementById('tarnung').classList.add('hidden');
             document.getElementById('fachAuswahl').classList.remove('hidden');
         }
         
-        async function openFach(fach){
+        function openFach(fach){
             document.getElementById('infoBox').innerHTML='✅ Öffne ' + fach.replace(/-/g,' ') + '...';
-            // Lädt die geheime URL aus einer externen Konfigurationsdatei
-            try {
-                const response = await fetch('./config.json');
-                const config = await response.json();
-                window.location.href = config.baseUrl + '/browser.html?fach=' + fach;
-            } catch(e) {
-                alert('Konfiguration konnte nicht geladen werden.');
-            }
+            // Leitet direkt zum Browser weiter
+            window.location.href = 'browser.html';
         }
     </script>
 </body>
