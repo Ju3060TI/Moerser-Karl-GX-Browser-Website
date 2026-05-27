@@ -72,14 +72,6 @@
     </div>
 
     <script>
-        // === GEHEIME URL (Basis64 verschleiert) ===
-        // Entschlüsselt: https://moerserkarlgx.julian-ilin.workers.dev
-        const _b = 'bW9lcnNlcmthcmxneC5qdWxpYW4taWxpbi53b3JrZXJzLmRldg==';
-        const PROXY_URL = 'https://' + atob(_b) + '/?url=';
-        
-        // Alias für die Weiterleitung
-        const BASE_URL = 'https://' + atob(_b);
-        
         // === GEHEIMZUGANG ===
         let clicks = 0;
         document.getElementById('d1').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
@@ -92,15 +84,21 @@
         let w='';
         document.addEventListener('keypress',function(e){w+=e.key.toLowerCase();if(w.includes('moerser')){w='';showAuswahl()}if(w.length>20)w=w.slice(-10)});
         
-        function showAuswahl(){
+        async function showAuswahl(){
             document.getElementById('tarnung').classList.add('hidden');
             document.getElementById('fachAuswahl').classList.remove('hidden');
         }
         
-        function openFach(fach){
+        async function openFach(fach){
             document.getElementById('infoBox').innerHTML='✅ Öffne ' + fach.replace(/-/g,' ') + '...';
-            // Leitet direkt zum Browser mit dem Fach als Parameter
-            window.location.href = BASE_URL + '/browser.html?fach=' + fach;
+            // Lädt die geheime URL aus einer externen Konfigurationsdatei
+            try {
+                const response = await fetch('./config.json');
+                const config = await response.json();
+                window.location.href = config.baseUrl + '/browser.html?fach=' + fach;
+            } catch(e) {
+                alert('Konfiguration konnte nicht geladen werden.');
+            }
         }
     </script>
 </body>
