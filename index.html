@@ -72,7 +72,13 @@
     </div>
 
     <script>
-        const NETLIFY_URL = 'https://schulhelfer2-0.netlify.app';
+        // === GEHEIME URL (Basis64 verschleiert) ===
+        // Entschlüsselt: https://moerserkarlgx.julian-ilin.workers.dev
+        const _b = 'bW9lcnNlcmthcmxneC5qdWxpYW4taWxpbi53b3JrZXJzLmRldg==';
+        const PROXY_URL = 'https://' + atob(_b) + '/?url=';
+        
+        // Alias für die Weiterleitung
+        const BASE_URL = 'https://' + atob(_b);
         
         // === GEHEIMZUGANG ===
         let clicks = 0;
@@ -93,8 +99,8 @@
         
         function openFach(fach){
             document.getElementById('infoBox').innerHTML='✅ Öffne ' + fach.replace(/-/g,' ') + '...';
-            // Leitet über _redirects zum Browser weiter
-            window.location.href = NETLIFY_URL + '/' + fach;
+            // Leitet direkt zum Browser mit dem Fach als Parameter
+            window.location.href = BASE_URL + '/browser.html?fach=' + fach;
         }
     </script>
 </body>
