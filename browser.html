@@ -89,12 +89,17 @@
             </div>
         </div>
         <div id="statusBar">
-            <div class="status-item"><span class="status-dot"></span> Netlify</div>
+            <div class="status-item"><span class="status-dot"></span> Cloudflare</div>
             <div class="status-item">🔒 Proxy aktiv</div>
             <div class="status-item" id="tabCount">0 Tabs</div>
         </div>
     </div>
 
+    <script>
+        // === GEHEIME URL (Basis64 verschleiert) ===
+        const _b = 'bW9lcnNlcmthcmxneC5qdWxpYW4taWxpbi53b3JrZXJzLmRldg==';
+        const PROXY = 'https://' + atob(_b) + '/?url=';
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
