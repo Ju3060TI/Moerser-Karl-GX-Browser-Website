@@ -1,7 +1,7 @@
 // ============================================
 // PROXY-KONFIGURATION (Base64-verschleiert)
 // ============================================
-const _x = 'bW9lcnNlcmthcmxneC5qdWxpYW4taWxpbi53b3JrZXJzLmRldg==';
+const _x = 'cHJveHkuaHVsaWFuLWlsaW4ud29ya2Vycy5kZXY=';
 const PROXY = 'https://' + atob(_x) + '/?url=';
 
 // ============================================
