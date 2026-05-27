@@ -95,20 +95,6 @@
         </div>
     </div>
 
-    <script>
-        // Lädt die Proxy-URL aus externer Konfiguration
-        async function initProxy() {
-            try {
-                const response = await fetch('./config.json');
-                const config = await response.json();
-                window.PROXY = config.proxyUrl + '/?url=';
-                console.log('Proxy initialisiert');
-            } catch(e) {
-                console.error('Proxy-Konfiguration konnte nicht geladen werden.');
-            }
-        }
-        initProxy();
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
