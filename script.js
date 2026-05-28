@@ -156,7 +156,7 @@ function feuern() {
     } else url = 'https://www.google.com/search?q=' + encodeURIComponent(eingabe);
     
     // Seiten die in neuem Tab öffnen müssen (starke iframe-Blocker)
-    const openInNewTab = ['youtube.com','youtu.be','netflix.com','twitch.tv','discord.com',
+    const openInNewTab = ['netflix.com','twitch.tv','discord.com',
         'tiktok.com','instagram.com','snapchat.com','reddit.com',
         'chat.openai.com','claude.ai','grok.x.ai','gemini.google.com'].some(d => url.includes(d));
     
@@ -165,8 +165,8 @@ function feuern() {
         return;
     }
     
-    // Seiten die Proxy brauchen
-    const needsProxy = ['desertorder.com','1v1.lol','subwaysurfers.com',
+    // Seiten die Proxy brauchen (YouTube + Spiele)
+    const needsProxy = ['youtube.com','youtu.be','desertorder.com','1v1.lol','subwaysurfers.com',
         'geometrydash.io','krunker.io','shellshockers.io','slope.game',
         'orteil.dashnet.org'].some(d => url.includes(d));
     
