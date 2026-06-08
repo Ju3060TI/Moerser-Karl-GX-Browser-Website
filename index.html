@@ -8,7 +8,6 @@
         body{font-family:Arial,sans-serif;background:#f5f5f5;height:100vh;display:flex;justify-content:center;align-items:center;user-select:none}
         .hidden{display:none}
         
-        /* 404 */
         .error-box{text-align:center;color:#333}
         .error-code{font-size:120px;font-weight:bold;color:#c00;text-shadow:2px 2px 4px rgba(0,0,0,.2)}
         .error-text{font-size:24px;margin:10px 0}
@@ -19,16 +18,11 @@
         @keyframes blink{0%,100%{opacity:.2}50%{opacity:1}}
         .hint{font-size:10px;color:#999;margin-top:30px}
         
-        /* Fach-Auswahl */
         .container{text-align:center;background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 30px rgba(0,0,0,.1);max-width:550px;width:90%}
         h1{color:#333;margin-bottom:5px;font-size:24px}
         .subtitle{color:#666;margin-bottom:20px;font-size:13px}
         .fach-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px;text-align:left}
-        .fach-btn{
-            padding:12px;border:2px solid #ddd;border-radius:8px;
-            cursor:pointer;font-size:14px;background:#fff;transition:all .2s;
-            display:flex;align-items:center;gap:8px;
-        }
+        .fach-btn{padding:12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;font-size:14px;background:#fff;transition:all .2s;display:flex;align-items:center;gap:8px}
         .fach-btn:hover{background:#e8f5e9;border-color:#4caf50;transform:scale(1.02)}
         .fach-btn:active{background:#c8e6c9}
         .info-box{background:#e8f5e9;padding:12px;border-radius:8px;font-size:13px;color:#2e7d32;margin:15px 0;text-align:center;min-height:40px;border:2px solid #4caf50}
@@ -36,7 +30,6 @@
     </style>
 </head>
 <body>
-    <!-- 404 -->
     <div id="tarnung">
         <div class="error-box">
             <div class="error-code">404</div>
@@ -46,33 +39,29 @@
         </div>
     </div>
     
-    <!-- Fach-Auswahl -->
     <div id="fachAuswahl" class="hidden">
         <div class="container">
             <h1>📚 Schulhelfer 2.0</h1>
             <p class="subtitle">Wähle dein Fach:</p>
-            
             <div class="fach-grid">
-                <div class="fach-btn" onclick="openFach('Mathe-Calculator')">📐 Mathe</div>
-                <div class="fach-btn" onclick="openFach('Deutsch-Grammatik')">📝 Deutsch</div>
-                <div class="fach-btn" onclick="openFach('Englisch-Vokabeln')">🇬🇧 Englisch</div>
-                <div class="fach-btn" onclick="openFach('Geschichte-Lexikon')">🏛️ Geschichte</div>
-                <div class="fach-btn" onclick="openFach('Informatik')">💻 Informatik</div>
-                <div class="fach-btn" onclick="openFach('Biologie-Lexikon')">🧬 Biologie</div>
-                <div class="fach-btn" onclick="openFach('Kunst-Gestaltung')">🎨 Kunst</div>
-                <div class="fach-btn" onclick="openFach('Geometrische-Zeichenvorlagen')">📐 GZ</div>
-                <div class="fach-btn" onclick="openFach('Kochrezepte')">🍳 EHH</div>
-                <div class="fach-btn" onclick="openFach('DGB-Lexikon')">🤝 DGB</div>
-                <div class="fach-btn" onclick="openFach('Soziales-Zusammenleben')">🫂 Soz</div>
+                <div class="fach-btn" onclick="openFach()">📐 Mathe</div>
+                <div class="fach-btn" onclick="openFach()">📝 Deutsch</div>
+                <div class="fach-btn" onclick="openFach()">🇬🇧 Englisch</div>
+                <div class="fach-btn" onclick="openFach()">🏛️ Geschichte</div>
+                <div class="fach-btn" onclick="openFach()">💻 Informatik</div>
+                <div class="fach-btn" onclick="openFach()">🧬 Biologie</div>
+                <div class="fach-btn" onclick="openFach()">🎨 Kunst</div>
+                <div class="fach-btn" onclick="openFach()">📐 GZ</div>
+                <div class="fach-btn" onclick="openFach()">🍳 EHH</div>
+                <div class="fach-btn" onclick="openFach()">🤝 DGB</div>
+                <div class="fach-btn" onclick="openFach()">🫂 Soz</div>
             </div>
-            
             <div class="info-box" id="infoBox">👆 Klick auf ein Fach um es zu öffnen</div>
             <p class="note">© 2024 Schulhelfer 2.0</p>
         </div>
     </div>
 
     <script>
-        // === GEHEIMZUGANG ===
         let clicks = 0;
         document.getElementById('d1').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
         document.getElementById('d2').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
@@ -89,9 +78,8 @@
             document.getElementById('fachAuswahl').classList.remove('hidden');
         }
         
-        function openFach(fach){
-            document.getElementById('infoBox').innerHTML='✅ Öffne ' + fach.replace(/-/g,' ') + '...';
-            // Leitet direkt zum Browser weiter
+        function openFach(){
+            document.getElementById('infoBox').innerHTML='✅ Lade Browser...';
             window.location.href = 'browser.html';
         }
     </script>
