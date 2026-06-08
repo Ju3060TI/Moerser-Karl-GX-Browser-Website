@@ -62,6 +62,7 @@ window.addTab = function(url, title) {
     frame.className = 'tab-frame';
     frame.id = 'frame-' + tabId;
     frame.src = url;
+    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation');
     framesContainer.appendChild(frame);
     tabEl.querySelector('.tab-close').addEventListener('click', function(e) { e.stopPropagation(); closeTab(tabId); });
     switchTab(tabId);
@@ -112,6 +113,9 @@ const seiten = {
     'krunker': 'https://krunker.io/',
     'shell': 'https://shellshockers.io/',
     'slope': 'https://slope.game/',
+    'roblox': 'https://www.roblox.com/',
+    'roblox.com': 'https://www.roblox.com/',
+    'now.gg': 'https://now.gg/apps/roblox-corporation/7832/roblox.html',
     'chatgpt': 'https://chat.openai.com/',
     'chat gpt': 'https://chat.openai.com/',
     'deepseek': 'https://chat.deepseek.com/',
@@ -123,8 +127,8 @@ const seiten = {
     'github': 'https://github.com/',
     'discord': 'https://discord.com/app/',
     'twitch': 'https://www.twitch.tv/',
-    'youtube': 'https://www.youtube.com/',
-    'yt': 'https://www.youtube.com/',
+    'youtube': 'https://www.youtube-nocookie.com/',
+    'yt': 'https://www.youtube-nocookie.com/',
     'wiki': 'https://www.wikipedia.org/',
     'wikipedia': 'https://www.wikipedia.org/',
     'spotify': 'https://open.spotify.com/',
@@ -165,8 +169,10 @@ function feuern() {
         return;
     }
     
-    // Seiten die Proxy brauchen (YouTube + Spiele)
-    const needsProxy = ['youtube.com','youtu.be','desertorder.com','1v1.lol','subwaysurfers.com',
+    // Seiten die Proxy brauchen
+    const needsProxy = ['youtube-nocookie.com','youtube.com','youtu.be',
+        'roblox.com','now.gg',
+        'desertorder.com','1v1.lol','subwaysurfers.com',
         'geometrydash.io','krunker.io','shellshockers.io','slope.game',
         'orteil.dashnet.org'].some(d => url.includes(d));
     
