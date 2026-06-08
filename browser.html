@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Schulhelfer2.0</title>
+    <title>Mörser-Karl GX</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -76,7 +76,10 @@
             <input type="text" id="urlInput" placeholder="🔍 URL oder Suche..." autofocus>
             <button id="feuerBtn">🎯 FEUER!</button>
         </div>
-        <div id="tabs"></div>
+        <div id="tabs">
+            <!-- + Button für neuen Tab -->
+            <div class="tab" id="newTabBtn" onclick="addTab('about:blank', '🆕 Neuer Tab')" style="background:transparent;border:1px dashed #444;color:#888;font-size:18px;padding:6px 12px;" title="Neuer Tab">＋</div>
+        </div>
         <div id="framesContainer">
             <div id="startPage">
                 <div id="startLogo">MÖRSER-KARL</div>
