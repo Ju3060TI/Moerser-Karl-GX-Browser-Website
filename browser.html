@@ -2,31 +2,31 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Schulhelfer2.0</title>
+    <title>Mörser-Karl GX</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- SIDEBAR -->
-    <div id="sidebar">
-        <div class="sidebar-icon" title="Neuer Tab" onclick="addTab('about:blank', '🆕 Neuer Tab')"><span>➕</span></div>
-        <div class="sidebar-icon" id="gamesBtn" title="Games"><span>🎮</span><div class="tooltip">Games</div></div>
-        <div class="sidebar-icon" id="socialBtn" title="Social"><span>👥</span><div class="tooltip">Social</div></div>
-        <div class="sidebar-icon" id="streamingBtn" title="Streaming"><span>📡</span><div class="tooltip">Streaming</div></div>
-        <div class="sidebar-icon" id="kiBtn" title="KI"><span>🧠</span><div class="tooltip">KI</div></div>
-        <div class="sidebar-icon" id="toolsBtn" title="Tools"><span>🛠️</span><div class="tooltip">Tools</div></div>
-        <div class="sidebar-icon" title="YouTube" onclick="addTab(PROXY+'https://www.youtube.com/', '▶️ YouTube')"><span>▶️</span></div>
-        <div class="sidebar-icon" title="Spotify" onclick="addTab('https://open.spotify.com/', '🎵 Spotify')"><span>🎵</span></div>
-        <div class="sidebar-icon" title="GitHub" onclick="addTab('https://github.com/', '🐙 GitHub')"><span>🐙</span></div>
-        <div class="sidebar-icon" title="Wikipedia" onclick="addTab('https://www.wikipedia.org/', '📚 Wiki')"><span>📚</span></div>
-        <div class="sidebar-icon" title="Bloxdi" onclick="addTab('https://bloxdi.netlify.app/', '🎯 Bloxdi')"><span>🎯</span></div>
-    </div>
+    <aside id="sidebar">
+        <div class="sidebar-icon" title="Neuer Tab" onclick="addTab('about:blank', '🆕 Neuer Tab')">➕</div>
+        <div class="sidebar-icon" id="gamesBtn" title="Games">🎮<div class="tooltip">Games</div></div>
+        <div class="sidebar-icon" id="socialBtn" title="Social">👥<div class="tooltip">Social</div></div>
+        <div class="sidebar-icon" id="streamingBtn" title="Streaming">📡<div class="tooltip">Streaming</div></div>
+        <div class="sidebar-icon" id="kiBtn" title="KI">🧠<div class="tooltip">KI</div></div>
+        <div class="sidebar-icon" id="toolsBtn" title="Tools">🛠️<div class="tooltip">Tools</div></div>
+        <div class="sidebar-icon" title="YouTube" onclick="addTab(PROXY+'https://www.youtube-nocookie.com/', '▶️ YouTube')">▶️</div>
+        <div class="sidebar-icon" title="Roblox" onclick="addTab(PROXY+'https://now.gg/apps/roblox-corporation/7832/roblox.html', '🎮 Roblox')">🎮</div>
+        <div class="sidebar-icon" title="Spotify" onclick="addTab('https://open.spotify.com/', '🎵 Spotify')">🎵</div>
+        <div class="sidebar-icon" title="GitHub" onclick="addTab('https://github.com/', '🐙 GitHub')">🐙</div>
+        <div class="sidebar-icon" title="Wikipedia" onclick="addTab('https://www.wikipedia.org/', '📚 Wiki')">📚</div>
+    </aside>
 
     <!-- GAMES POPUP -->
     <div id="gamesPopup" class="popup">
         <div class="popup-title">🎮 GAMES</div>
+        <div class="popup-item" onclick="addTab(PROXY+'https://now.gg/apps/roblox-corporation/7832/roblox.html', '🎮 Roblox');togglePopup('gamesPopup')">🎮 Roblox</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://desertorder.com/', '🏜️ Desert Order');togglePopup('gamesPopup')">🏜️ Desert Order</div>
         <div class="popup-item" onclick="addTab('https://bloxd.io/', '🎮 Bloxd.io');togglePopup('gamesPopup')">🎮 Bloxd.io</div>
-        <div class="popup-item" onclick="addTab('https://bloxdi.netlify.app/', '🎯 Bloxdi');togglePopup('gamesPopup')">🎯 Bloxdi</div>
         <div class="popup-item" onclick="addTab('https://orteil.dashnet.org/cookieclicker/', '🍪 Cookie Clicker');togglePopup('gamesPopup')">🍪 Cookie Clicker</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://1v1.lol/', '🔫 1v1.LOL');togglePopup('gamesPopup')">🔫 1v1.LOL</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://krunker.io/', '🎯 Krunker');togglePopup('gamesPopup')">🎯 Krunker</div>
@@ -40,18 +40,15 @@
         <div class="popup-item" onclick="addTab(PROXY+'https://www.instagram.com/', '📷 Instagram');togglePopup('socialPopup')">📷 Instagram</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://www.reddit.com/', '🤖 Reddit');togglePopup('socialPopup')">🤖 Reddit</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://www.twitter.com/', '🐦 Twitter/X');togglePopup('socialPopup')">🐦 Twitter/X</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.snapchat.com/', '👻 Snapchat');togglePopup('socialPopup')">👻 Snapchat</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://discord.com/app/', '💬 Discord');togglePopup('socialPopup')">💬 Discord</div>
     </div>
 
     <!-- STREAMING POPUP -->
     <div id="streamingPopup" class="popup">
         <div class="popup-title">📡 STREAMING</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.youtube.com/', '▶️ YouTube');togglePopup('streamingPopup')">▶️ YouTube</div>
+        <div class="popup-item" onclick="addTab(PROXY+'https://www.youtube-nocookie.com/', '▶️ YouTube');togglePopup('streamingPopup')">▶️ YouTube</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://www.twitch.tv/', '📺 Twitch');togglePopup('streamingPopup')">📺 Twitch</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://www.netflix.com/', '🎬 Netflix');togglePopup('streamingPopup')">🎬 Netflix</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://www.disneyplus.com/', '🏰 Disney+');togglePopup('streamingPopup')">🏰 Disney+</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.crunchyroll.com/', '🍥 Crunchyroll');togglePopup('streamingPopup')">🍥 Crunchyroll</div>
     </div>
 
     <!-- KI POPUP -->
@@ -60,9 +57,7 @@
         <div class="popup-item" onclick="addTab(PROXY+'https://chat.openai.com/', '🤖 ChatGPT');togglePopup('kiPopup')">🤖 ChatGPT</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://claude.ai/', '🧪 Claude');togglePopup('kiPopup')">🧪 Claude</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://chat.deepseek.com/', '🧠 DeepSeek');togglePopup('kiPopup')">🧠 DeepSeek</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://grok.x.ai/', '🐦 Grok');togglePopup('kiPopup')">🐦 Grok</div>
         <div class="popup-item" onclick="addTab(PROXY+'https://perplexity.ai/', '🔍 Perplexity');togglePopup('kiPopup')">🔍 Perplexity</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://gemini.google.com/', '💎 Gemini');togglePopup('kiPopup')">💎 Gemini</div>
     </div>
 
     <!-- TOOLS POPUP -->
@@ -74,7 +69,7 @@
         <div class="popup-item" onclick="addTab('https://www.photopea.com/', '🖼️ Photopea');togglePopup('toolsPopup')">🖼️ Photopea</div>
     </div>
 
-    <!-- MAIN -->
+    <!-- MAIN CONTENT -->
     <div id="mainContent">
         <div id="topBar">
             <span id="logo">💣 MÖRSER-KARL GX</span>
@@ -88,12 +83,14 @@
                 <div id="startSub">GX EDITION</div>
             </div>
         </div>
-        <div id="statusBar">
-            <div class="status-item"><span class="status-dot"></span> Geschützt</div>
-            <div class="status-item">🔒 Proxy aktiv</div>
-            <div class="status-item" id="tabCount">0 Tabs</div>
-        </div>
     </div>
+
+    <!-- STATUSLEISTE -->
+    <footer id="statusBar">
+        <div class="status-item"><span class="status-dot"></span> Geschützt</div>
+        <div class="status-item">🔒 Proxy aktiv</div>
+        <div class="status-item" id="tabCount">0 Tabs</div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
