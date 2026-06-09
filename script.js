@@ -3,7 +3,7 @@
 // ============================================
 // ACHTUNG: Du brauchst einen funktionierenden Proxy-Server!
 // Ersetze die URL mit deinem eigenen Proxy (z.B. Cloudflare Worker)
-const PROXY = 'https://cors-anywhere.herokuapp.com/';
+const PROXY = 'https://proxy.ju-labs.workers.dev/';
 
 // ============================================
 // BROWSER-LOGIK
