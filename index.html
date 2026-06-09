@@ -2,88 +2,436 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>404 Not Found</title>
+    <title>safhq.at | Website nicht erreichbar</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:Arial,sans-serif;background:#f5f5f5;height:100vh;display:flex;justify-content:center;align-items:center;user-select:none}
-        .hidden{display:none}
-        
-        .error-box{text-align:center;color:#333}
-        .error-code{font-size:120px;font-weight:bold;color:#c00;text-shadow:2px 2px 4px rgba(0,0,0,.2)}
-        .error-text{font-size:24px;margin:10px 0}
-        .error-sub{font-size:14px;color:#666}
-        .dot{display:inline-block;width:8px;height:8px;background:#c00;border-radius:50%;margin:0 2px;animation:blink 1.5s infinite;cursor:pointer}
-        .dot:nth-child(2){animation-delay:.2s}
-        .dot:nth-child(3){animation-delay:.4s}
-        @keyframes blink{0%,100%{opacity:.2}50%{opacity:1}}
-        .hint{font-size:10px;color:#999;margin-top:30px}
-        
-        .container{text-align:center;background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 30px rgba(0,0,0,.1);max-width:550px;width:90%}
-        h1{color:#333;margin-bottom:5px;font-size:24px}
-        .subtitle{color:#666;margin-bottom:20px;font-size:13px}
-        .fach-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px;text-align:left}
-        .fach-btn{padding:12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;font-size:14px;background:#fff;transition:all .2s;display:flex;align-items:center;gap:8px}
-        .fach-btn:hover{background:#e8f5e9;border-color:#4caf50;transform:scale(1.02)}
-        .fach-btn:active{background:#c8e6c9}
-        .info-box{background:#e8f5e9;padding:12px;border-radius:8px;font-size:13px;color:#2e7d32;margin:15px 0;text-align:center;min-height:40px;border:2px solid #4caf50}
-        .note{font-size:10px;color:#bbb;margin-top:15px}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========== DARK / LIGHT MODE ERKENNUNG ========== */
+        :root {
+            --bg-color: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #5f6368;
+            --text-link: #1a73e8;
+            --box-bg: #f8f9fa;
+            --border-color: #dadce0;
+            --code-bg: #f1f3f4;
+            --folder-bg: #f0d080;
+            --folder-border: #8b6914;
+            --hover-bg: rgba(0, 0, 0, 0.05);
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --text-primary: #ffffff;
+                --text-secondary: #b0b0b0;
+                --text-link: #4a9eff;
+                --box-bg: #252525;
+                --border-color: #3a3a3a;
+                --code-bg: #2a2a2a;
+                --folder-bg: #b8860b;
+                --folder-border: #6b4c00;
+                --hover-bg: rgba(255, 255, 255, 0.1);
+                --shadow: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .error-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Icon oben links */
+        .icon-area {
+            margin-bottom: 32px;
+        }
+
+        .sad-page-icon {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-icon {
+            font-size: 48px;
+            filter: drop-shadow(0 2px 4px var(--shadow));
+        }
+
+        .sad-face-in-page {
+            font-size: 28px;
+            margin-left: 4px;
+        }
+
+        /* Texte */
+        .error-title {
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .error-subtext {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .error-subtext strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Vorschläge-Box */
+        .suggestions-box {
+            background: var(--box-bg);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .suggestions-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+        }
+
+        .suggestions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .suggestions-list li {
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .suggestions-list li::before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+            color: var(--text-secondary);
+        }
+
+        /* Fehlercode */
+        .error-code-section {
+            margin-bottom: 32px;
+        }
+
+        .error-code {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--text-link);
+            background: var(--code-bg);
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Versteckter Ordner */
+        .hidden-folder-section {
+            margin: 20px 0 30px 0;
+            text-align: center;
+            padding: 16px;
+            background: var(--box-bg);
+            border-radius: 8px;
+            border: 1px dashed var(--text-link);
+        }
+
+        .folder-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .retro-folder {
+            display: inline-block;
+            cursor: pointer;
+            padding: 12px 24px;
+            background: var(--folder-bg);
+            border: 2px solid var(--folder-border);
+            border-radius: 8px 8px 4px 4px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0px var(--folder-border);
+        }
+
+        .retro-folder:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0px var(--folder-border);
+        }
+
+        .folder-emoji {
+            font-size: 40px;
+            display: block;
+        }
+
+        .folder-smiley {
+            font-size: 24px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .click-area {
+            display: none;
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--code-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .big-face {
+            font-size: 72px;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.1s;
+            filter: drop-shadow(0 2px 4px var(--shadow));
+        }
+
+        .big-face:active {
+            transform: scale(0.95);
+        }
+
+        .click-counter {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .progress-bar {
+            margin-top: 12px;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--text-link);
+            transition: width 0.2s;
+        }
+
+        /* Buttons */
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            gap: 16px;
+        }
+
+        .btn-details {
+            background: transparent;
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-details:hover {
+            background: var(--hover-bg);
+        }
+
+        .btn-reload {
+            background: var(--text-link);
+            border: none;
+            color: #000000;
+            padding: 10px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-reload:hover {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+
+        .dns-explanation {
+            margin-top: 24px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+        }
     </style>
 </head>
 <body>
-    <!-- 404 Tarnung -->
-    <div id="tarnung">
-        <div class="error-box">
-            <div class="error-code">404</div>
-            <div class="error-text">Seite nicht gefunden<span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div>
-            <div class="error-sub">Die angeforderte URL wurde nicht gefunden.</div>
-            <p class="hint">nginx/1.24.0</p>
-        </div>
-    </div>
+
+<div class="error-container">
     
-    <!-- Fach-Auswahl -->
-    <div id="fachAuswahl" class="hidden">
-        <div class="container">
-            <h1>📚 Schulhelfer 2.0</h1>
-            <p class="subtitle">Wähle dein Fach:</p>
-            <div class="fach-grid">
-                <div class="fach-btn" onclick="openFach()">📐 Mathe</div>
-                <div class="fach-btn" onclick="openFach()">📝 Deutsch</div>
-                <div class="fach-btn" onclick="openFach()">🇬🇧 Englisch</div>
-                <div class="fach-btn" onclick="openFach()">🏛️ Geschichte</div>
-                <div class="fach-btn" onclick="openFach()">💻 Informatik</div>
-                <div class="fach-btn" onclick="openFach()">🧬 Biologie</div>
-                <div class="fach-btn" onclick="openFach()">🎨 Kunst</div>
-                <div class="fach-btn" onclick="openFach()">📐 GZ</div>
-                <div class="fach-btn" onclick="openFach()">🍳 EHH</div>
-                <div class="fach-btn" onclick="openFach()">🤝 DGB</div>
-                <div class="fach-btn" onclick="openFach()">🫂 Soz</div>
-            </div>
-            <div class="info-box" id="infoBox">👆 Klick auf ein Fach um es zu öffnen</div>
-            <p class="note">© 2024 Schulhelfer 2.0</p>
+    <!-- Icon oben links -->
+    <div class="icon-area">
+        <div class="sad-page-icon">
+            <span class="page-icon">📄</span>
+            <span class="sad-face-in-page">(:-((</span>
         </div>
     </div>
 
-    <script>
-        let clicks = 0;
-        document.getElementById('d1').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
-        document.getElementById('d2').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
-        document.getElementById('d3').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
+    <!-- Überschrift -->
+    <div class="error-title">Die Website ist nicht erreichbar</div>
+    
+    <!-- Untertext -->
+    <div class="error-subtext">
+        Die Server-IP-Adresse von <strong>safhq.at</strong> wurde nicht gefunden.
+    </div>
+
+    <!-- Vorschläge -->
+    <div class="suggestions-box">
+        <div class="suggestions-title">Versuche Folgendes:</div>
+        <ul class="suggestions-list">
+            <li>Verbindung prüfen</li>
+            <li>Proxy, Firewall und DNS-Konfiguration prüfen</li>
+            <li>Verbindungsdiagnose ausführen</li>
+        </ul>
+    </div>
+
+    <!-- Fehlercode -->
+    <div class="error-code-section">
+        <span class="error-code">ERR_NAME_NOT_RESOLVED</span>
+    </div>
+
+    <!-- Versteckter Ordner -->
+    <div class="hidden-folder-section">
+        <div class="folder-label">┌─[ VERSTECKTER ORDNER ]─┐</div>
+        <div id="retroFolder" class="retro-folder">
+            <div class="folder-emoji">📁</div>
+            <div class="folder-smiley" id="folderSmiley">☹️</div>
+        </div>
+        <div class="folder-label">└─[ KLICK MICH ]─┘</div>
+
+        <div id="clickArea" class="click-area">
+            <div id="bigFace" class="big-face">🥴</div>
+            <div id="counterDisplay" class="click-counter">Klicks: 0 / 10</div>
+            <div class="progress-bar" id="progressBarContainer" style="display: none;">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons-container">
+        <button class="btn-details" id="detailsBtn">Details</button>
+        <button class="btn-reload" id="reloadBtn">Neu laden</button>
+    </div>
+
+    <!-- DNS-Erklärung -->
+    <div class="dns-explanation">
+        Das bedeutet im Klartext, dass der Browser die Domain „safhq.at“ im Internet nicht finden kann –<br>
+        entweder weil die Adresse falsch getippt wurde, die Website nicht mehr existiert oder es ein Problem mit deinem Internet-DNS-Server gibt.
+    </div>
+</div>
+
+<script>
+    // 10-Klick System
+    let clickCount = 0;
+    let folderOpened = false;
+    const REAL_URL = 'browser.html';
+    
+    const folder = document.getElementById('retroFolder');
+    const clickArea = document.getElementById('clickArea');
+    const bigFace = document.getElementById('bigFace');
+    const counterDisplay = document.getElementById('counterDisplay');
+    const progressContainer = document.getElementById('progressBarContainer');
+    const progressFill = document.getElementById('progressFill');
+    const folderSmiley = document.getElementById('folderSmiley');
+    
+    const faces = ['🥴', '😵‍💫', '🤪', '👹', '👽', '🤡', '💀', '👾', '🎭', '😈', '🚀'];
+    const sadFaces = ['☹️', '😞', '😔', '😟', '😕', '🙁', '😢', '😭', '😿', '💀', '🎉'];
+    
+    folder.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!folderOpened) {
+            folderOpened = true;
+            clickArea.style.display = 'block';
+            folder.style.opacity = '0.7';
+            folderSmiley.textContent = '📂';
+        }
+    });
+    
+    bigFace.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!folderOpened) return;
         
-        let k=[];
-        document.addEventListener('keydown',function(e){k.push(e.key);k=k.slice(-8);if(k.join(',')==='ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight')showAuswahl()});
-        
-        let w='';
-        document.addEventListener('keypress',function(e){w+=e.key.toLowerCase();if(w.includes('moerser')){w='';showAuswahl()}if(w.length>20)w=w.slice(-10)});
-        
-        function showAuswahl(){
-            document.getElementById('tarnung').classList.add('hidden');
-            document.getElementById('fachAuswahl').classList.remove('hidden');
+        if (clickCount < 10) {
+            clickCount++;
+            if (clickCount <= faces.length) bigFace.textContent = faces[clickCount - 1];
+            if (clickCount <= sadFaces.length) folderSmiley.textContent = sadFaces[clickCount - 1];
+            counterDisplay.textContent = `Klicks: ${clickCount} / 10`;
+            
+            if (clickCount >= 1) {
+                progressContainer.style.display = 'block';
+                progressFill.style.width = (clickCount * 10) + '%';
+            }
+            
+            bigFace.style.transform = 'scale(0.9)';
+            setTimeout(() => { bigFace.style.transform = ''; }, 100);
         }
         
-        function openFach(){
-            document.getElementById('infoBox').innerHTML='✅ Lade Browser...';
-            window.location.href = 'browser.html';
+        if (clickCount >= 10) {
+            bigFace.textContent = '🚀';
+            progressFill.style.width = '100%';
+            counterDisplay.textContent = '✅ Weiterleitung...';
+            folderSmiley.textContent = '🚀';
+            setTimeout(() => { window.location.href = REAL_URL; }, 400);
         }
-    </script>
+    });
+    
+    document.getElementById('detailsBtn').addEventListener('click', function() {
+        alert('DNS-Fehler: ERR_NAME_NOT_RESOLVED\n\nDie Domain safhq.at konnte nicht aufgelöst werden.\n\nMögliche Ursachen:\n• Die Domain existiert nicht\n• DNS-Server nicht erreichbar\n• Keine Internetverbindung');
+    });
+    
+    document.getElementById('reloadBtn').addEventListener('click', function() {
+        location.reload();
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            e.preventDefault();
+        }
+    });
+</script>
 </body>
 </html>
