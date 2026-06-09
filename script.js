@@ -1,8 +1,9 @@
 // ============================================
-// PROXY-KONFIGURATION (Base64-verschleiert)
+// PROXY-KONFIGURATION
 // ============================================
-const _x = 'cHJveHkuanUtbGFicy53b3JrZXJzLmRldg==';
-const PROXY = 'https://' + atob(_x) + '/?url=';
+// ACHTUNG: Du brauchst einen funktionierenden Proxy-Server!
+// Ersetze die URL mit deinem eigenen Proxy (z.B. Cloudflare Worker)
+const PROXY = 'https://cors-anywhere.herokuapp.com/';
 
 // ============================================
 // BROWSER-LOGIK
@@ -18,7 +19,9 @@ const feuerBtn = document.getElementById('feuerBtn');
 const tabCountEl = document.getElementById('tabCount');
 const startPage = document.getElementById('startPage');
 
-// === POPUPS ===
+// ============================================
+// POPUPS
+// ============================================
 function togglePopup(popupId) {
     const popup = document.getElementById(popupId);
     if (!popup) return;
@@ -46,28 +49,37 @@ document.addEventListener('click', e => {
     });
 });
 
-// === TABS ===
-window.addTab = function(url, title) {
+// ============================================
+// TABS
+// ============================================
+function addTab(url, title) {
     tabCounter++;
     const tabId = 'tab-' + tabCounter;
     tabs.push({ id: tabId, url, title });
     if (startPage) startPage.classList.add('hidden');
+    
     const tabEl = document.createElement('div');
     tabEl.className = 'tab';
     tabEl.id = 'tab-el-' + tabId;
     tabEl.innerHTML = '<span>' + title + '</span><span class="tab-close" data-tabid="' + tabId + '">✕</span>';
     tabEl.addEventListener('click', function(e) { if (!e.target.classList.contains('tab-close')) switchTab(tabId); });
     tabsContainer.appendChild(tabEl);
+    
     const frame = document.createElement('iframe');
     frame.className = 'tab-frame';
     frame.id = 'frame-' + tabId;
     frame.src = url;
-    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation');
+    frame.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
     framesContainer.appendChild(frame);
+    
     tabEl.querySelector('.tab-close').addEventListener('click', function(e) { e.stopPropagation(); closeTab(tabId); });
     switchTab(tabId);
     updateTabCount();
-};
+}
+
+function addTabWithProxy(url, title) {
+    addTab(PROXY + url, title);
+}
 
 function switchTab(tabId) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -75,14 +87,25 @@ function switchTab(tabId) {
     const tabEl = document.getElementById('tab-el-' + tabId);
     const frame = document.getElementById('frame-' + tabId);
     if (tabEl) tabEl.classList.add('active');
-    if (frame) { frame.classList.add('active'); urlInput.value = frame.src.replace(PROXY, '').replace('about:blank', ''); }
+    if (frame) { 
+        frame.classList.add('active'); 
+        let currentUrl = frame.src;
+        if (currentUrl.startsWith(PROXY)) {
+            currentUrl = currentUrl.replace(PROXY, '');
+        }
+        urlInput.value = currentUrl.replace('about:blank', '');
+    }
     activeTabId = tabId;
     if (startPage) startPage.classList.add('hidden');
 }
 
 function closeTab(tabId) {
+    const frame = document.getElementById('frame-' + tabId);
+    if (frame) {
+        frame.src = 'about:blank';
+        frame.remove();
+    }
     document.getElementById('tab-el-' + tabId)?.remove();
-    document.getElementById('frame-' + tabId)?.remove();
     tabs = tabs.filter(t => t.id !== tabId);
     if (activeTabId === tabId) {
         if (tabs.length > 0) switchTab(tabs[tabs.length - 1].id);
@@ -95,13 +118,14 @@ function updateTabCount() {
     tabCountEl.textContent = tabs.length + ' Tab' + (tabs.length !== 1 ? 's' : '');
 }
 
-// === KEYWORDS ===
+// ============================================
+// KEYWORDS / SEITEN
+// ============================================
 const seiten = {
     'desert': 'https://desertorder.com/',
     'desert order': 'https://desertorder.com/',
     'bloxd': 'https://bloxd.io/',
     'bloxd io': 'https://bloxd.io/',
-    'bloxdi': 'https://bloxdi.netlify.app/',
     'cookie': 'https://orteil.dashnet.org/cookieclicker/',
     'cookie clicker': 'https://orteil.dashnet.org/cookieclicker/',
     '1v1': 'https://1v1.lol/',
@@ -111,41 +135,26 @@ const seiten = {
     'geometry': 'https://geometrydash.io/',
     'geometry dash': 'https://geometrydash.io/',
     'krunker': 'https://krunker.io/',
-    'shell': 'https://shellshockers.io/',
     'slope': 'https://slope.game/',
     'roblox': 'https://www.roblox.com/',
-    'roblox.com': 'https://www.roblox.com/',
-    'now.gg': 'https://now.gg/apps/roblox-corporation/7832/roblox.html',
     'chatgpt': 'https://chat.openai.com/',
     'chat gpt': 'https://chat.openai.com/',
     'deepseek': 'https://chat.deepseek.com/',
     'claude': 'https://claude.ai/',
-    'grok': 'https://grok.x.ai/',
-    'perplexity': 'https://perplexity.ai/',
-    'gemini': 'https://gemini.google.com/',
-    'copilot': 'https://copilot.microsoft.com/',
     'github': 'https://github.com/',
-    'discord': 'https://discord.com/app/',
-    'twitch': 'https://www.twitch.tv/',
     'youtube': 'https://www.youtube-nocookie.com/',
     'yt': 'https://www.youtube-nocookie.com/',
     'wiki': 'https://www.wikipedia.org/',
-    'wikipedia': 'https://www.wikipedia.org/',
     'spotify': 'https://open.spotify.com/',
     'google': 'https://www.google.com/',
     'docs': 'https://docs.google.com/',
-    'slides': 'https://slides.google.com/',
-    'sheets': 'https://sheets.google.com/',
     'canva': 'https://www.canva.com/',
-    'photopea': 'https://www.photopea.com/',
     'netflix': 'https://www.netflix.com/',
-    'disney': 'https://www.disneyplus.com/',
-    'crunchyroll': 'https://www.crunchyroll.com/',
+    'twitch': 'https://www.twitch.tv/',
     'tiktok': 'https://www.tiktok.com/',
     'instagram': 'https://www.instagram.com/',
     'reddit': 'https://www.reddit.com/',
     'twitter': 'https://www.twitter.com/',
-    'snapchat': 'https://www.snapchat.com/',
 };
 
 function feuern() {
@@ -159,22 +168,17 @@ function feuern() {
         url = eingabe;
     } else url = 'https://www.google.com/search?q=' + encodeURIComponent(eingabe);
     
-    // Seiten die in neuem Tab öffnen müssen (starke iframe-Blocker)
     const openInNewTab = ['netflix.com','twitch.tv','discord.com',
         'tiktok.com','instagram.com','snapchat.com','reddit.com',
-        'chat.openai.com','claude.ai','grok.x.ai','gemini.google.com'].some(d => url.includes(d));
+        'chat.openai.com','claude.ai'].some(d => url.includes(d));
     
     if (openInNewTab) {
         window.open(url, '_blank');
         return;
     }
     
-    // Seiten die Proxy brauchen
-    const needsProxy = ['youtube-nocookie.com','youtube.com','youtu.be',
-        'roblox.com','now.gg',
-        'desertorder.com','1v1.lol','subwaysurfers.com',
-        'geometrydash.io','krunker.io','shellshockers.io','slope.game',
-        'orteil.dashnet.org'].some(d => url.includes(d));
+    const needsProxy = ['youtube-nocookie.com','youtube.com','roblox.com',
+        'desertorder.com','1v1.lol','krunker.io','slope.game'].some(d => url.includes(d));
     
     if (needsProxy) {
         addTab(PROXY + url, lower.length > 20 ? lower.substring(0, 20) + '...' : lower);
@@ -185,3 +189,8 @@ function feuern() {
 
 feuerBtn.addEventListener('click', feuern);
 urlInput.addEventListener('keypress', e => { if (e.key === 'Enter') feuern(); });
+
+// Globale Funktionen für HTML-Aufrufe
+window.addTab = addTab;
+window.addTabWithProxy = addTabWithProxy;
+window.togglePopup = togglePopup;
