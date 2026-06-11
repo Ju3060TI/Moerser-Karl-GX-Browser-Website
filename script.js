@@ -62,7 +62,7 @@ window.addTab = function(url, title) {
     frame.className = 'tab-frame';
     frame.id = 'frame-' + tabId;
     frame.src = url;
-    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation');
+    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation allow-pointer-lock');
     framesContainer.appendChild(frame);
     tabEl.querySelector('.tab-close').addEventListener('click', function(e) { e.stopPropagation(); closeTab(tabId); });
     switchTab(tabId);
@@ -93,6 +93,20 @@ function closeTab(tabId) {
 
 function updateTabCount() {
     tabCountEl.textContent = tabs.length + ' Tab' + (tabs.length !== 1 ? 's' : '');
+}
+
+// === CURSOR SPERREN ===
+function lockCursor() {
+    const activeFrame = document.querySelector('.tab-frame.active');
+    if (activeFrame && activeFrame.contentDocument) {
+        try {
+            activeFrame.contentDocument.body.requestPointerLock();
+        } catch (e) {
+            console.log('Pointer Lock nicht möglich:', e);
+        }
+    } else {
+        alert('Kein aktives Spielfenster gefunden.');
+    }
 }
 
 // === KEYWORDS ===
