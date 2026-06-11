@@ -158,22 +158,15 @@ function feuern() {
         url = eingabe;
     } else url = 'https://www.google.com/search?q=' + encodeURIComponent(eingabe);
     
-    // Seiten die in neuem Tab öffnen müssen (starke iframe-Blocker)
-    const openInNewTab = ['netflix.com','twitch.tv','discord.com',
-        'tiktok.com','instagram.com','snapchat.com','reddit.com',
-        'chat.openai.com','claude.ai','grok.x.ai','gemini.google.com'].some(d => url.includes(d));
-    
-    if (openInNewTab) {
-        window.open(url, '_blank');
-        return;
-    }
-    
-    // Seiten die Proxy brauchen
-    const needsProxy = ['youtube-nocookie.com','youtube.com','youtu.be',
-        'roblox.com','now.gg',
+    // ALLES über Proxy oder direkt im Iframe – nichts in neuem Fenster!
+    const needsProxy = ['youtube.com','youtu.be','roblox.com','now.gg',
         'desertorder.com','1v1.lol','subwaysurfers.com',
         'geometrydash.io','krunker.io','shellshockers.io','slope.game',
-        'orteil.dashnet.org'].some(d => url.includes(d));
+        'orteil.dashnet.org','twitch.tv','netflix.com',
+        'disneyplus.com','tiktok.com','instagram.com',
+        'reddit.com','twitter.com','snapchat.com',
+        'chat.openai.com','claude.ai','chat.deepseek.com',
+        'perplexity.ai','gemini.google.com'].some(d => url.includes(d));
     
     if (needsProxy) {
         addTab(PROXY + url, lower.length > 20 ? lower.substring(0, 20) + '...' : lower);
