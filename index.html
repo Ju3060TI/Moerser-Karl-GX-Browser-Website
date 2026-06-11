@@ -2,632 +2,88 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>safhq.at | Website nicht erreichbar</title>
+    <title>404 Not Found</title>
     <style>
-        :root{
-            color-scheme: light dark;
-            --bg-color:#ffffff;
-            --text-primary:#111111;
-            --text-secondary:#5f6368;
-            --text-link:#1a73e8;
-            --box-bg:#f8f9fa;
-            --border-color:#dadce0;
-            --code-bg:#f1f3f4;
-            --hover-bg:rgba(0,0,0,.05);
-            --shadow:rgba(0,0,0,.12);
-
-            --lava-1:#ff4500;
-            --lava-2:#ff6600;
-            --lava-3:#ff8c00;
-            --lava-4:#cc3300;
-            --lava-5:#ff2200;
-            --lava-dark-1:#1a0000;
-            --lava-dark-2:#2a0200;
-            --lava-dark-3:#0a0000;
-
-            --sidebar-bg:rgba(255,255,255,.92);
-            --topbar-bg:rgba(255,255,255,.92);
-            --tabs-bg:rgba(245,245,245,.96);
-            --status-bg:rgba(255,255,255,.92);
-            --frame-bg:#ffffff;
-        }
-
-        @media (prefers-color-scheme: dark){
-            :root{
-                --bg-color:#1a1a1a;
-                --text-primary:#ffffff;
-                --text-secondary:#b0b0b0;
-                --text-link:#4a9eff;
-                --box-bg:#252525;
-                --border-color:#3a3a3a;
-                --code-bg:#2a2a2a;
-                --hover-bg:rgba(255,255,255,.08);
-                --shadow:rgba(255,255,255,.08);
-
-                --sidebar-bg:rgba(10,0,0,.95);
-                --topbar-bg:rgba(10,0,0,.95);
-                --tabs-bg:rgba(15,5,0,.95);
-                --status-bg:rgba(10,0,0,.95);
-                --frame-bg:#000000;
-            }
-        }
-
         *{margin:0;padding:0;box-sizing:border-box}
-        html,body{height:100%}
-        body{
-            font-family:'Segoe UI',Arial,sans-serif;
-            height:100vh;
-            display:flex;
-            overflow:hidden;
-            background:var(--bg-color);
-            color:var(--text-primary);
-        }
-
-        .lava-bg{
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            z-index:-1;
-            background:
-                radial-gradient(ellipse at 20% 85%, var(--lava-1) 0%, transparent 20%),
-                radial-gradient(ellipse at 50% 90%, var(--lava-2) 0%, transparent 25%),
-                radial-gradient(ellipse at 80% 80%, var(--lava-3) 0%, transparent 20%),
-                radial-gradient(ellipse at 30% 40%, var(--lava-4) 0%, transparent 18%),
-                radial-gradient(ellipse at 60% 30%, var(--lava-5) 0%, transparent 15%),
-                radial-gradient(ellipse at 50% 55%, #ff5500 0%, transparent 12%),
-                linear-gradient(0deg, var(--lava-dark-1) 0%, var(--lava-dark-2) 25%, var(--lava-dark-3) 100%);
-            background-size:250% 250%;
-            animation:lava 6s ease infinite;
-            opacity:.95;
-        }
-
-        @keyframes lava{
-            0%{background-position:0% 100%}
-            30%{background-position:60% 85%}
-            60%{background-position:100% 95%}
-            100%{background-position:30% 100%}
-        }
-
-        #sidebar{
-            width:55px;
-            background:var(--sidebar-bg);
-            border-right:1px solid var(--border-color);
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            padding-top:15px;
-            gap:8px;
-            z-index:10;
-            box-shadow:2px 0 15px var(--shadow);
-            flex-shrink:0;
-        }
-
-        .sidebar-icon{
-            width:40px;height:40px;border-radius:8px;
-            background:rgba(255,69,0,.15);
-            border:1px solid rgba(255,69,0,.3);
-            display:flex;align-items:center;justify-content:center;
-            font-size:18px;cursor:pointer;transition:all .3s;color:#ff6347;position:relative;
-        }
-        .sidebar-icon:hover{
-            background:rgba(255,69,0,.4);border-color:#ff4500;
-            box-shadow:0 0 20px rgba(255,69,0,.5);transform:scale(1.1);
-        }
-        .sidebar-icon .tooltip{
-            display:none;position:absolute;left:55px;background:#1a0a00;color:#ffa500;
-            padding:5px 10px;border-radius:5px;font-size:11px;white-space:nowrap;
-            border:1px solid #ff4500;z-index:100;
-        }
-        .sidebar-icon:hover .tooltip{display:block;}
-
-        .popup{
-            display:none;position:fixed;left:65px;background:rgba(10,0,0,.98);
-            border:1px solid #ff4500;border-radius:12px;padding:12px;z-index:200;
-            box-shadow:0 0 25px rgba(255,69,0,.3);min-width:240px;max-height:80vh;overflow-y:auto;
-        }
-        .popup.show{display:block;}
-        .popup-title{
-            color:#ff6347;font-size:12px;text-transform:uppercase;letter-spacing:2px;
-            padding:5px 10px;border-bottom:1px solid #333;margin-bottom:5px;
-        }
-        .popup-item{
-            padding:10px 15px;margin:2px 0;border-radius:8px;cursor:pointer;
-            color:#ccc;font-size:13px;transition:all .3s;display:flex;align-items:center;gap:10px;
-        }
-        .popup-item:hover{background:rgba(255,69,0,.3);color:#fff;box-shadow:0 0 15px rgba(255,69,0,.4);}
-        #gamesPopup{top:55px;}#kiPopup{top:105px;}#toolsPopup{top:155px;}
-        #socialPopup{top:55px;}#streamingPopup{top:105px;}
-
-        #mainContent{
-            flex:1;
-            height:100vh;
-            display:flex;
-            flex-direction:column;
-            position:relative;
-            overflow:hidden;
-        }
-
-        #topBar{
-            display:flex;padding:12px 20px;
-            background:var(--topbar-bg);
-            border-bottom:1px solid var(--border-color);
-            gap:10px;align-items:center;
-            flex-shrink:0;
-            box-shadow:0 2px 15px var(--shadow);
-        }
-        #logo{
-            font-size:16px;font-weight:900;letter-spacing:2px;
-            background:linear-gradient(135deg,#ff4500,#ff6347);
-            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-            background-clip:text;text-transform:uppercase;white-space:nowrap;
-        }
-        #urlInput{
-            flex:1;padding:10px 18px;
-            background:var(--box-bg);border:1px solid var(--border-color);
-            border-radius:25px;font-size:14px;color:var(--text-primary);
-            font-family:'Segoe UI',sans-serif;transition:all .3s;outline:none;
-        }
-        #urlInput:focus{border-color:#ff4500;box-shadow:0 0 15px rgba(255,69,0,.3)}
-        #urlInput::placeholder{color:var(--text-secondary)}
-        #feuerBtn{
-            padding:10px 25px;border:1px solid #ff4500;border-radius:25px;
-            font-size:13px;font-weight:700;cursor:pointer;letter-spacing:1px;
-            transition:all .3s;background:transparent;color:#ff4500;text-transform:uppercase;
-        }
-        #feuerBtn:hover{background:#ff4500;color:#000;box-shadow:0 0 25px rgba(255,69,0,.6);transform:scale(1.05)}
-
-        #tabs{
-            display:flex;background:var(--tabs-bg);
-            border-bottom:1px solid var(--border-color);padding:0 10px;
-            flex-shrink:0;gap:2px;overflow-x:auto;min-height:36px;
-        }
-        #tabs::-webkit-scrollbar{height:3px}
-        #tabs::-webkit-scrollbar-thumb{background:#ff4500;border-radius:3px}
-        .tab{
-            padding:8px 18px;background:rgba(30,10,0,.8);color:#999;
-            border-radius:6px 6px 0 0;cursor:pointer;font-size:12px;
-            transition:all .3s;border:1px solid transparent;border-bottom:none;
-            white-space:nowrap;display:flex;align-items:center;gap:8px;
-        }
-        .tab:hover{color:#fff;background:rgba(50,20,0,.8)}
-        .tab.active{
-            background:#1a0a00;color:#ff6347;border-color:#ff4500;
-            box-shadow:0 0 10px rgba(255,69,0,.3);
-        }
-        .tab-close{font-size:14px;opacity:.5;cursor:pointer;margin-left:5px}
-        .tab-close:hover{opacity:1;color:#ff4500}
-
-        #framesContainer{flex:1;position:relative;overflow:hidden}
-        #startPage{
-            position:absolute;top:0;left:0;width:100%;height:100%;
-            display:flex;flex-direction:column;justify-content:center;align-items:center;
-            z-index:5;pointer-events:none;background:transparent;
-        }
-        #startLogo{
-            font-size:72px;font-weight:900;letter-spacing:8px;
-            background:linear-gradient(135deg,#ff4500,#ff8c00,#ff6347);
-            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-            background-clip:text;text-transform:uppercase;margin-bottom:5px;
-        }
-        #startSub{font-size:16px;color:#8b4513;letter-spacing:5px;text-transform:uppercase}
-        #startPage.hidden{display:none}
-
-        .tab-frame{
-            position:absolute;top:0;left:0;width:100%;height:100%;
-            border:none;background:var(--frame-bg);display:none;
-        }
-        .tab-frame.active{display:block}
-
-        #statusBar{
-            display:flex;padding:6px 20px;
-            background:var(--status-bg);
-            border-top:1px solid var(--border-color);
-            font-size:11px;color:#8b4513;
-            gap:25px;flex-shrink:0;
-            position:fixed;bottom:0;left:55px;right:0;
-            z-index:300;
-        }
-        .status-item{display:flex;align-items:center;gap:6px}
-        .status-dot{
-            width:6px;height:6px;border-radius:50%;
-            background:#0f0;box-shadow:0 0 8px #0f0;
-        }
-
-        .error-container {
-            max-width: 600px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 24px;
-        }
-
-        .icon-area { margin-bottom: 32px; }
-        .sad-page-icon { display:inline-flex; flex-direction:column; align-items:center; justify-content:center; }
-        .page-icon { font-size:48px; filter:drop-shadow(0 2px 4px var(--shadow)); }
-        .sad-face-in-page { font-size:28px; margin-left:4px; }
-
-        .error-title {
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-        .error-subtext {
-            font-size: 15px;
-            color: var(--text-secondary);
-            margin-bottom: 28px;
-            line-height: 1.5;
-        }
-        .error-subtext strong { color: var(--text-primary); font-weight: 500; }
-
-        .suggestions-box {
-            background: var(--box-bg);
-            border-radius: 8px;
-            padding: 20px 24px;
-            margin-bottom: 24px;
-            border: 1px solid var(--border-color);
-        }
-        .suggestions-title {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 14px;
-        }
-        .suggestions-list { list-style: none; padding: 0; }
-        .suggestions-list li {
-            color: var(--text-secondary);
-            font-size: 14px;
-            padding: 6px 0 6px 20px;
-            position: relative;
-        }
-        .suggestions-list li::before {
-            content: "•";
-            position: absolute;
-            left: 4px;
-            color: var(--text-secondary);
-        }
-
-        .error-code-section { margin-bottom: 32px; }
-        .error-code {
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: var(--text-link);
-            background: var(--code-bg);
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 4px;
-            letter-spacing: 0.5px;
-            border: 1px solid var(--border-color);
-        }
-
-        .hidden-folder-section {
-            margin: 20px 0 30px 0;
-            text-align: center;
-            padding: 16px;
-            background: var(--box-bg);
-            border-radius: 8px;
-            border: 1px dashed var(--text-link);
-        }
-        .folder-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-        .retro-folder {
-            display:inline-block;
-            cursor:pointer;
-            padding:12px 24px;
-            background:#b8860b;
-            border:2px solid #6b4c00;
-            border-radius:8px 8px 4px 4px;
-            transition:all .2s;
-            box-shadow:0 4px 0 #6b4c00;
-        }
-        .retro-folder:active { transform:translateY(2px); box-shadow:0 2px 0 #6b4c00; }
-        .folder-emoji { font-size:40px; display:block; }
-        .folder-smiley { font-size:24px; margin-top:4px; display:block; }
-
-        .click-area {
-            display:none;
-            margin-top:20px;
-            padding:16px;
-            background:var(--code-bg);
-            border-radius:8px;
-            border:1px solid var(--border-color);
-        }
-        .big-face {
-            font-size:72px;
-            cursor:pointer;
-            display:inline-block;
-            transition:all .1s;
-            filter:drop-shadow(0 2px 4px var(--shadow));
-        }
-        .big-face:active { transform:scale(.95); }
-        .click-counter {
-            font-family:'Courier New', monospace;
-            font-size:12px;
-            color:var(--text-secondary);
-            margin-top:8px;
-        }
-        .progress-bar {
-            margin-top:12px;
-            height:4px;
-            background:var(--border-color);
-            border-radius:2px;
-            overflow:hidden;
-            width:200px;
-            margin-left:auto;
-            margin-right:auto;
-        }
-        .progress-fill {
-            height:100%;
-            width:0%;
-            background:var(--text-link);
-            transition:width .2s;
-        }
-
-        .buttons-container {
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-top:16px;
-            gap:16px;
-        }
-        .btn-details {
-            background:transparent;
-            border:1px solid var(--text-primary);
-            color:var(--text-primary);
-            padding:10px 24px;
-            font-size:14px;
-            font-weight:500;
-            border-radius:4px;
-            cursor:pointer;
-            transition:all .2s;
-            font-family:inherit;
-        }
-        .btn-details:hover { background:var(--hover-bg); }
-        .btn-reload {
-            background:var(--text-link);
-            border:none;
-            color:#000;
-            padding:10px 28px;
-            font-size:14px;
-            font-weight:600;
-            border-radius:4px;
-            cursor:pointer;
-            transition:all .2s;
-            font-family:inherit;
-        }
-        .btn-reload:hover { filter:brightness(1.1); transform:scale(1.02); }
-
-        .dns-explanation {
-            margin-top: 24px;
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 16px;
-        }
-
-        .page-wrap{
-            width:100%;
-            height:100%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            padding:24px;
-        }
+        body{font-family:Arial,sans-serif;background:#f5f5f5;height:100vh;display:flex;justify-content:center;align-items:center;user-select:none}
+        .hidden{display:none}
+        
+        .error-box{text-align:center;color:#333}
+        .error-code{font-size:120px;font-weight:bold;color:#c00;text-shadow:2px 2px 4px rgba(0,0,0,.2)}
+        .error-text{font-size:24px;margin:10px 0}
+        .error-sub{font-size:14px;color:#666}
+        .dot{display:inline-block;width:8px;height:8px;background:#c00;border-radius:50%;margin:0 2px;animation:blink 1.5s infinite;cursor:pointer}
+        .dot:nth-child(2){animation-delay:.2s}
+        .dot:nth-child(3){animation-delay:.4s}
+        @keyframes blink{0%,100%{opacity:.2}50%{opacity:1}}
+        .hint{font-size:10px;color:#999;margin-top:30px}
+        
+        .container{text-align:center;background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 30px rgba(0,0,0,.1);max-width:550px;width:90%}
+        h1{color:#333;margin-bottom:5px;font-size:24px}
+        .subtitle{color:#666;margin-bottom:20px;font-size:13px}
+        .fach-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px;text-align:left}
+        .fach-btn{padding:12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;font-size:14px;background:#fff;transition:all .2s;display:flex;align-items:center;gap:8px}
+        .fach-btn:hover{background:#e8f5e9;border-color:#4caf50;transform:scale(1.02)}
+        .fach-btn:active{background:#c8e6c9}
+        .info-box{background:#e8f5e9;padding:12px;border-radius:8px;font-size:13px;color:#2e7d32;margin:15px 0;text-align:center;min-height:40px;border:2px solid #4caf50}
+        .note{font-size:10px;color:#bbb;margin-top:15px}
     </style>
 </head>
 <body>
-    <div class="lava-bg"></div>
-
-    <aside id="sidebar">
-        <div class="sidebar-icon" data-popup="gamesPopup">🎮<span class="tooltip">Games</span></div>
-        <div class="sidebar-icon" data-popup="kiPopup">🤖<span class="tooltip">KI</span></div>
-        <div class="sidebar-icon" data-popup="toolsPopup">🛠<span class="tooltip">Tools</span></div>
-        <div class="sidebar-icon" data-popup="socialPopup">💬<span class="tooltip">Social</span></div>
-        <div class="sidebar-icon" data-popup="streamingPopup">▶️<span class="tooltip">Stream</span></div>
-    </aside>
-
-    <div id="gamesPopup" class="popup">
-        <div class="popup-title">Games</div>
-        <div class="popup-item">🔥 Lava Quest</div>
-        <div class="popup-item">🧩 Puzzle Core</div>
-        <div class="popup-item">🚀 Rocket Run</div>
-    </div>
-    <div id="kiPopup" class="popup">
-        <div class="popup-title">KI</div>
-        <div class="popup-item">🧠 Chat Engine</div>
-        <div class="popup-item">⚙️ Auto Assist</div>
-    </div>
-    <div id="toolsPopup" class="popup">
-        <div class="popup-title">Tools</div>
-        <div class="popup-item">🔍 DNS Checker</div>
-        <div class="popup-item">🧪 Debug Console</div>
-    </div>
-    <div id="socialPopup" class="popup">
-        <div class="popup-title">Social</div>
-        <div class="popup-item">💜 Feed</div>
-        <div class="popup-item">📨 Messages</div>
-    </div>
-    <div id="streamingPopup" class="popup">
-        <div class="popup-title">Streaming</div>
-        <div class="popup-item">🎬 Live Now</div>
-        <div class="popup-item">📺 Watchlist</div>
-    </div>
-
-    <main id="mainContent">
-        <div id="topBar">
-            <div id="logo">SAFHQ</div>
-            <input id="urlInput" type="text" placeholder="URL eingeben...">
-            <button id="feuerBtn">GO</button>
+    <!-- 404 Tarnung -->
+    <div id="tarnung">
+        <div class="error-box">
+            <div class="error-code">404</div>
+            <div class="error-text">Seite nicht gefunden<span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div>
+            <div class="error-sub">Die angeforderte URL wurde nicht gefunden.</div>
+            <p class="hint">nginx/1.24.0</p>
         </div>
-
-        <div id="tabs">
-            <div class="tab active">safhq.at <span class="tab-close">×</span></div>
-            <div class="tab">Neuer Tab <span class="tab-close">×</span></div>
-        </div>
-
-        <div id="framesContainer">
-            <div id="startPage">
-                <div id="startLogo">SAFHQ</div>
-                <div id="startSub">browser</div>
+    </div>
+    
+    <!-- Fach-Auswahl -->
+    <div id="fachAuswahl" class="hidden">
+        <div class="container">
+            <h1>📚 Schulhelfer 2.0</h1>
+            <p class="subtitle">Wähle dein Fach:</p>
+            <div class="fach-grid">
+                <div class="fach-btn" onclick="openFach()">📐 Mathe</div>
+                <div class="fach-btn" onclick="openFach()">📝 Deutsch</div>
+                <div class="fach-btn" onclick="openFach()">🇬🇧 Englisch</div>
+                <div class="fach-btn" onclick="openFach()">🏛️ Geschichte</div>
+                <div class="fach-btn" onclick="openFach()">💻 Informatik</div>
+                <div class="fach-btn" onclick="openFach()">🧬 Biologie</div>
+                <div class="fach-btn" onclick="openFach()">🎨 Kunst</div>
+                <div class="fach-btn" onclick="openFach()">📐 GZ</div>
+                <div class="fach-btn" onclick="openFach()">🍳 EHH</div>
+                <div class="fach-btn" onclick="openFach()">🤝 DGB</div>
+                <div class="fach-btn" onclick="openFach()">🫂 Soz</div>
             </div>
-
-            <div class="page-wrap">
-                <div class="error-container">
-                    <div class="icon-area">
-                        <div class="sad-page-icon">
-                            <span class="page-icon">📄</span>
-                            <span class="sad-face-in-page">(:-((</span>
-                        </div>
-                    </div>
-
-                    <div class="error-title">Die Website ist nicht erreichbar</div>
-                    <div class="error-subtext">
-                        Die Server-IP-Adresse von <strong>safhq.at</strong> wurde nicht gefunden.
-                    </div>
-
-                    <div class="suggestions-box">
-                        <div class="suggestions-title">Versuche Folgendes:</div>
-                        <ul class="suggestions-list">
-                            <li>Verbindung prüfen</li>
-                            <li>Proxy, Firewall und DNS-Konfiguration prüfen</li>
-                            <li>Verbindungsdiagnose ausführen</li>
-                        </ul>
-                    </div>
-
-                    <div class="error-code-section">
-                        <span class="error-code">ERR_NAME_NOT_RESOLVED</span>
-                    </div>
-
-                    <div class="hidden-folder-section">
-                        <div class="folder-label">┌─[ VERSTECKTER ORDNER ]─┐</div>
-                        <div id="retroFolder" class="retro-folder">
-                            <div class="folder-emoji">📁</div>
-                            <div class="folder-smiley" id="folderSmiley">☹️</div>
-                        </div>
-                        <div class="folder-label">└─[ KLICK MICH ]─┘</div>
-
-                        <div id="clickArea" class="click-area">
-                            <div id="bigFace" class="big-face">🥴</div>
-                            <div id="counterDisplay" class="click-counter">Klicks: 0 / 10</div>
-                            <div class="progress-bar" id="progressBarContainer" style="display: none;">
-                                <div id="progressFill" class="progress-fill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="buttons-container">
-                        <button class="btn-details" id="detailsBtn">Details</button>
-                        <button class="btn-reload" id="reloadBtn">Neu laden</button>
-                    </div>
-
-                    <div class="dns-explanation">
-                        Das bedeutet im Klartext, dass der Browser die Domain „safhq.at“ im Internet nicht finden kann –<br>
-                        entweder weil die Adresse falsch getippt wurde, die Website nicht mehr existiert oder es ein Problem mit deinem Internet-DNS-Server gibt.
-                    </div>
-                </div>
-            </div>
+            <div class="info-box" id="infoBox">👆 Klick auf ein Fach um es zu öffnen</div>
+            <p class="note">© 2024 Schulhelfer 2.0</p>
         </div>
-
-        <div id="statusBar">
-            <div class="status-item"><span class="status-dot"></span><span>Online</span></div>
-            <div class="status-item">DNS: unstable</div>
-            <div class="status-item">Mode: auto</div>
-        </div>
-    </main>
+    </div>
 
     <script>
-        let clickCount = 0;
-        let folderOpened = false;
-        const REAL_URL = 'browser.html';
-
-        const folder = document.getElementById('retroFolder');
-        const clickArea = document.getElementById('clickArea');
-        const bigFace = document.getElementById('bigFace');
-        const counterDisplay = document.getElementById('counterDisplay');
-        const progressContainer = document.getElementById('progressBarContainer');
-        const progressFill = document.getElementById('progressFill');
-        const folderSmiley = document.getElementById('folderSmiley');
-
-        const faces = ['🥴', '😵‍💫', '🤪', '👹', '👽', '🤡', '💀', '👾', '🎭', '😈', '🚀'];
-        const sadFaces = ['☹️', '😞', '😔', '😟', '😕', '🙁', '😢', '😭', '😿', '💀', '🎉'];
-
-        folder.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (!folderOpened) {
-                folderOpened = true;
-                clickArea.style.display = 'block';
-                folder.style.opacity = '0.7';
-                folderSmiley.textContent = '📂';
-            }
-        });
-
-        bigFace.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (!folderOpened) return;
-
-            if (clickCount < 10) {
-                clickCount++;
-                if (clickCount <= faces.length) bigFace.textContent = faces[clickCount - 1];
-                if (clickCount <= sadFaces.length) folderSmiley.textContent = sadFaces[clickCount - 1];
-                counterDisplay.textContent = `Klicks: ${clickCount} / 10`;
-
-                if (clickCount >= 1) {
-                    progressContainer.style.display = 'block';
-                    progressFill.style.width = (clickCount * 10) + '%';
-                }
-
-                bigFace.style.transform = 'scale(0.9)';
-                setTimeout(() => { bigFace.style.transform = ''; }, 100);
-            }
-
-            if (clickCount >= 10) {
-                bigFace.textContent = '🚀';
-                progressFill.style.width = '100%';
-                counterDisplay.textContent = '✅ Weiterleitung...';
-                folderSmiley.textContent = '🚀';
-                setTimeout(() => { window.location.href = REAL_URL; }, 400);
-            }
-        });
-
-        document.getElementById('detailsBtn').addEventListener('click', function() {
-            alert('DNS-Fehler: ERR_NAME_NOT_RESOLVED\\n\\nDie Domain safhq.at konnte nicht aufgelöst werden.\\n\\nMögliche Ursachen:\\n• Die Domain existiert nicht\\n• DNS-Server nicht erreichbar\\n• Keine Internetverbindung');
-        });
-
-        document.getElementById('reloadBtn').addEventListener('click', function() {
-            location.reload();
-        });
-
-        document.querySelectorAll('.sidebar-icon').forEach(icon => {
-            icon.addEventListener('click', () => {
-                const id = icon.dataset.popup;
-                document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
-                const popup = document.getElementById(id);
-                popup.classList.toggle('show');
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.popup') && !e.target.closest('.sidebar-icon')) {
-                document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
-            }
-        });
-
-        document.getElementById('feuerBtn').addEventListener('click', () => {
-            const url = document.getElementById('urlInput').value.trim();
-            if (url) document.getElementById('urlInput').value = url;
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
-        });
+        let clicks = 0;
+        document.getElementById('d1').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
+        document.getElementById('d2').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
+        document.getElementById('d3').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
+        
+        let k=[];
+        document.addEventListener('keydown',function(e){k.push(e.key);k=k.slice(-8);if(k.join(',')==='ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight')showAuswahl()});
+        
+        let w='';
+        document.addEventListener('keypress',function(e){w+=e.key.toLowerCase();if(w.includes('moerser')){w='';showAuswahl()}if(w.length>20)w=w.slice(-10)});
+        
+        function showAuswahl(){
+            document.getElementById('tarnung').classList.add('hidden');
+            document.getElementById('fachAuswahl').classList.remove('hidden');
+        }
+        
+        function openFach(){
+            document.getElementById('infoBox').innerHTML='✅ Lade Browser...';
+            window.location.href = 'browser.html';
+        }
     </script>
 </body>
 </html>
