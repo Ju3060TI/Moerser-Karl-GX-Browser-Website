@@ -129,6 +129,7 @@ const seiten = {
     'slope': 'https://slope.game/',
     'roblox': 'https://now.gg/apps/roblox-corporation/7832/roblox.html',
     'roblox now': 'https://now.gg/apps/roblox-corporation/7832/roblox.html',
+    'crunchyroll': 'https://www.crunchyroll.com/',
     'chatgpt': 'https://chat.openai.com/',
     'chat gpt': 'https://chat.openai.com/',
     'deepseek': 'https://chat.deepseek.com/',
@@ -153,7 +154,6 @@ const seiten = {
     'photopea': 'https://www.photopea.com/',
     'netflix': 'https://www.netflix.com/',
     'disney': 'https://www.disneyplus.com/',
-    'crunchyroll': 'https://www.crunchyroll.com/',
     'tiktok': 'https://www.tiktok.com/',
     'instagram': 'https://www.instagram.com/',
     'reddit': 'https://www.reddit.com/',
@@ -173,7 +173,7 @@ function feuern() {
     } else url = 'https://www.google.com/search?q=' + encodeURIComponent(eingabe);
     
     // ALLES über Proxy oder direkt im Iframe – nichts in neuem Fenster!
-    const needsProxy = ['youtube.com','youtu.be','roblox.com','now.gg',
+    const needsProxy = ['youtube.com','youtu.be','roblox.com','now.gg','crunchyroll.com',
         'desertorder.com','1v1.lol','subwaysurfers.com',
         'geometrydash.io','krunker.io','shellshockers.io','slope.game',
         'orteil.dashnet.org','twitch.tv','netflix.com',
