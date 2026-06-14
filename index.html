@@ -1,87 +1,227 @@
 <!DOCTYPE html>
-<html lang="de">
+<html dir="ltr" lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>404 Not Found</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>schulhelfer2-0.onrender.com</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:Arial,sans-serif;background:#f5f5f5;height:100vh;display:flex;justify-content:center;align-items:center;user-select:none}
-        .hidden{display:none}
-        
-        .error-box{text-align:center;color:#333}
-        .error-code{font-size:120px;font-weight:bold;color:#c00;text-shadow:2px 2px 4px rgba(0,0,0,.2)}
-        .error-text{font-size:24px;margin:10px 0}
-        .error-sub{font-size:14px;color:#666}
-        .dot{display:inline-block;width:8px;height:8px;background:#c00;border-radius:50%;margin:0 2px;animation:blink 1.5s infinite;cursor:pointer}
-        .dot:nth-child(2){animation-delay:.2s}
-        .dot:nth-child(3){animation-delay:.4s}
-        @keyframes blink{0%,100%{opacity:.2}50%{opacity:1}}
-        .hint{font-size:10px;color:#999;margin-top:30px}
-        
-        .container{text-align:center;background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 30px rgba(0,0,0,.1);max-width:550px;width:90%}
-        h1{color:#333;margin-bottom:5px;font-size:24px}
-        .subtitle{color:#666;margin-bottom:20px;font-size:13px}
-        .fach-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px;text-align:left}
-        .fach-btn{padding:12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;font-size:14px;background:#fff;transition:all .2s;display:flex;align-items:center;gap:8px}
-        .fach-btn:hover{background:#e8f5e9;border-color:#4caf50;transform:scale(1.02)}
-        .fach-btn:active{background:#c8e6c9}
-        .info-box{background:#e8f5e9;padding:12px;border-radius:8px;font-size:13px;color:#2e7d32;margin:15px 0;text-align:center;min-height:40px;border:2px solid #4caf50}
-        .note{font-size:10px;color:#bbb;margin-top:15px}
+        body {
+            font-family: Roboto, sans-serif;
+            font-size: 75%;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .interstitial-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .icon-generic {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 20px;
+            background: #f1f3f4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-generic::before {
+            content: "⚠️";
+            font-size: 36px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #202124;
+            margin: 0 0 10px 0;
+        }
+        p {
+            font-size: 14px;
+            color: #5f6368;
+            margin: 0 0 20px 0;
+        }
+        strong {
+            color: #202124;
+            font-weight: 500;
+        }
+        .error-code {
+            font-size: 12px;
+            color: #9aa0a6;
+            margin-top: 20px;
+        }
+        ul {
+            text-align: left;
+            display: inline-block;
+            margin: 0 auto;
+            padding: 0;
+            list-style-position: inside;
+            color: #5f6368;
+            font-size: 13px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        button {
+            background: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #1557b0;
+        }
+        .secondary-button {
+            background: transparent;
+            color: #1a73e8;
+            border: 1px solid #dadce0;
+        }
+        .secondary-button:hover {
+            background: #f1f3f4;
+        }
+        #details {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #5f6368;
+        }
+        .suggestions {
+            margin-bottom: 15px;
+        }
+        .suggestion-header {
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+        .suggestion-body {
+            font-size: 11px;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #202124;
+            }
+            h1 {
+                color: #e8eaed;
+            }
+            p, li, .suggestion-body, .error-code {
+                color: #9aa0a6;
+            }
+            strong {
+                color: #e8eaed;
+            }
+            .icon-generic {
+                background: #303134;
+            }
+            button {
+                background: #8ab4f8;
+                color: #202124;
+            }
+            button:hover {
+                background: #aecbfa;
+            }
+            .secondary-button {
+                background: transparent;
+                color: #8ab4f8;
+                border-color: #5f6368;
+            }
+            .secondary-button:hover {
+                background: #303134;
+            }
+            #details {
+                background: #303134;
+            }
+            .suggestion-header {
+                color: #e8eaed;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="tarnung">
-        <div class="error-box">
-            <div class="error-code">404</div>
-            <div class="error-text">Seite nicht gefunden<span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div>
-            <div class="error-sub">Die angeforderte URL wurde nicht gefunden.</div>
-            <p class="hint">nginx/1.24.0</p>
-        </div>
-    </div>
-    
-    <div id="fachAuswahl" class="hidden">
-        <div class="container">
-            <h1>📚 Schulhelfer 2.0</h1>
-            <p class="subtitle">Wähle dein Fach:</p>
-            <div class="fach-grid">
-                <div class="fach-btn" onclick="openFach()">📐 Mathe</div>
-                <div class="fach-btn" onclick="openFach()">📝 Deutsch</div>
-                <div class="fach-btn" onclick="openFach()">🇬🇧 Englisch</div>
-                <div class="fach-btn" onclick="openFach()">🏛️ Geschichte</div>
-                <div class="fach-btn" onclick="openFach()">💻 Informatik</div>
-                <div class="fach-btn" onclick="openFach()">🧬 Biologie</div>
-                <div class="fach-btn" onclick="openFach()">🎨 Kunst</div>
-                <div class="fach-btn" onclick="openFach()">📐 GZ</div>
-                <div class="fach-btn" onclick="openFach()">🍳 EHH</div>
-                <div class="fach-btn" onclick="openFach()">🤝 DGB</div>
-                <div class="fach-btn" onclick="openFach()">🫂 Soz</div>
+    <div id="content">
+        <div id="main-frame-error" class="interstitial-wrapper">
+            <div id="main-content">
+                <div class="icon icon-generic"></div>
+                <div id="main-message">
+                    <h1>
+                        <span>Die Website ist nicht erreichbar</span>
+                    </h1>
+                    <p>Die Server-IP-Adresse von <strong>schulhelfer2-0.onrender.com</strong> wurde nicht gefunden.</p>
+                    <div id="suggestions-list">
+                        <p>Versuche Folgendes:</p>
+                        <ul>
+                            <li>Verbindung prüfen</li>
+                            <li><a href="#" onclick="document.getElementById('details').style.display='block';return false;">Proxy, Firewall und DNS-Konfiguration prüfen</a></li>
+                            <li><a id="diagnose-link" href="#">Verbindungsdiagnose ausführen</a></li>
+                        </ul>
+                    </div>
+                    <div class="error-code">ERR_NAME_NOT_RESOLVED</div>
+                </div>
             </div>
-            <div class="info-box" id="infoBox">👆 Klick auf ein Fach um es zu öffnen</div>
-            <p class="note">© 2024 Schulhelfer 2.0</p>
+            <div id="buttons" class="nav-wrapper suggested-right">
+                <div id="control-buttons">
+                    <button id="reload-button" class="blue-button text-button" onclick="location.reload()">
+                        Neu laden
+                    </button>
+                </div>
+                <button id="details-button" class="secondary-button text-button small-link" onclick="document.getElementById('details').style.display='block'">
+                    Details
+                </button>
+            </div>
+            <div id="details">
+                <div class="suggestions">
+                    <div class="suggestion-header">Bitte überprüfe deine Internetverbindung.</div>
+                    <div class="suggestion-body">Überprüfe alle Kabel und starte alle verwendeten Router, Modems und anderen Netzwerkgeräte neu.</div>
+                </div>
+                <div class="suggestions">
+                    <div class="suggestion-header">Überprüfe die DNS-Einstellungen.</div>
+                    <div class="suggestion-body">Wenn du weitere Informationen dazu benötigst, kann dir dein Netzwerkadministrator weiterhelfen.</div>
+                </div>
+                <div class="suggestions">
+                    <div class="suggestion-header">Deaktiviere die Netzwerkvorhersage.</div>
+                    <div class="suggestion-body">Öffne das Chrome-Menü &gt; Einstellungen &gt; Erweiterte Einstellungen anzeigen und deaktiviere "Vorhersagefunktion zum schnelleren Laden von Seiten verwenden".</div>
+                </div>
+                <div class="suggestions">
+                    <div class="suggestion-header">Erlaube Chrome in deinen Firewall- und Virenschutzeinstellungen den Zugriff auf das Netzwerk.</div>
+                    <div class="suggestion-body">Falls das Programm schon in der Liste mit erlaubtem Netzwerkzugriff eingetragen ist, entferne es aus der Liste und füge es noch einmal hinzu.</div>
+                </div>
+                <div class="suggestions">
+                    <div class="suggestion-header">Falls du einen Proxyserver verwendest…</div>
+                    <div class="suggestion-body">Du kannst alle für eine Verbindung konfigurierten Proxys auf der Seite „Einstellungen“ deaktivieren.</div>
+                </div>
+            </div>
+        </div>
+        <div id="sub-frame-error">
+            <div class="icon"></div>
+            <div id="sub-frame-error-details">Die Server-IP-Adresse von <strong>schulhelfer2-0.onrender.com</strong> wurde nicht gefunden.</div>
         </div>
     </div>
 
     <script>
-        let clicks = 0;
-        document.getElementById('d1').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
-        document.getElementById('d2').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
-        document.getElementById('d3').addEventListener('click',function(e){e.stopPropagation();clicks++;if(clicks>=5)showAuswahl()});
-        
-        let k=[];
-        document.addEventListener('keydown',function(e){k.push(e.key);k=k.slice(-8);if(k.join(',')==='ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight')showAuswahl()});
-        
-        let w='';
-        document.addEventListener('keypress',function(e){w+=e.key.toLowerCase();if(w.includes('moerser')){w='';showAuswahl()}if(w.length>20)w=w.slice(-10)});
-        
-        function showAuswahl(){
-            document.getElementById('tarnung').classList.add('hidden');
-            document.getElementById('fachAuswahl').classList.remove('hidden');
-        }
-        
-        function openFach(){
-            document.getElementById('infoBox').innerHTML='✅ Lade Browser...';
-            window.location.href = 'browser.html';
-        }
+        // Tarnung: Beim Klick auf "Neu laden" oder "Diagnose" soll der Browser nicht wirklich was tun
+        document.getElementById('diagnose-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('details').style.display = 'block';
+        });
     </script>
 </body>
 </html>
