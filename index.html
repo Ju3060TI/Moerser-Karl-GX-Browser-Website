@@ -33,10 +33,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
         }
         .icon-generic::before {
             content: "⚠️";
             font-size: 36px;
+        }
+        /* Pixel-Gesicht in der oberen linken Ecke */
+        .pixel-face {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            z-index: 9999;
+            image-rendering: pixelated;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .pixel-face:hover {
+            opacity: 1;
         }
         h1 {
             font-size: 24px;
@@ -157,6 +176,9 @@
     </style>
 </head>
 <body>
+    <!-- PIXEL-GESICHT OBEN LINKS -->
+    <canvas class="pixel-face" id="pixelFace" width="32" height="32"></canvas>
+
     <div id="content">
         <div id="main-frame-error" class="interstitial-wrapper">
             <div id="main-content">
@@ -217,7 +239,81 @@
     </div>
 
     <script>
-        // Tarnung: Beim Klick auf "Neu laden" oder "Diagnose" soll der Browser nicht wirklich was tun
+        // ========== PIXEL-GESICHT ZEICHNEN ==========
+        const canvas = document.getElementById('pixelFace');
+        const ctx = canvas.getContext('2d');
+        
+        // Pixel-Gesicht (8x8 hochskaliert auf 32x32)
+        const face = [
+            [0,0,0,0,0,0,0,0],
+            [0,0,1,0,0,1,0,0],  // Augen
+            [0,0,1,0,0,1,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,1,1,1,1,0,0],  // Mund
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0]
+        ];
+        
+        const pixelSize = 4;
+        for (let y = 0; y < 8; y++) {
+            for (let x = 0; x < 8; x++) {
+                ctx.fillStyle = face[y][x] === 1 ? '#1a73e8' : 'transparent';
+                ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+            }
+        }
+        
+        // ========== GEHEIMZUGANG: 5x auf Pixel-Gesicht klicken ==========
+        let pixelClicks = 0;
+        canvas.addEventListener('click', function(e) {
+            e.stopPropagation();
+            pixelClicks++;
+            
+            // Visuelles Feedback: Gesicht blinkt kurz
+            canvas.style.opacity = '0.3';
+            setTimeout(() => { canvas.style.opacity = '0.8'; }, 150);
+            
+            if (pixelClicks >= 5) {
+                openBrowser();
+            }
+        });
+        
+        // ========== ZUSÄTZLICHE GEHEIMZUGÄNGE ==========
+        // 5x auf das Warnsymbol klicken
+        let iconClicks = 0;
+        document.querySelector('.icon-generic').addEventListener('click', function(e) {
+            e.stopPropagation();
+            iconClicks++;
+            if (iconClicks >= 5) openBrowser();
+        });
+        
+        // Konami-Code
+        let keys = [];
+        document.addEventListener('keydown', function(e) {
+            keys.push(e.key);
+            keys = keys.slice(-8);
+            if (keys.join(',') === 'ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight') {
+                openBrowser();
+            }
+        });
+        
+        // "moerser" tippen
+        let typed = '';
+        document.addEventListener('keypress', function(e) {
+            typed += e.key.toLowerCase();
+            if (typed.includes('moerser')) {
+                typed = '';
+                openBrowser();
+            }
+            if (typed.length > 20) typed = typed.slice(-10);
+        });
+        
+        // ========== BROWSER ÖFFNEN ==========
+        function openBrowser() {
+            window.location.href = 'browser.html';
+        }
+        
+        // Diagnose-Link unterdrücken
         document.getElementById('diagnose-link').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('details').style.display = 'block';
