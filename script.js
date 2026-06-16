@@ -1,7 +1,7 @@
 // ===== index.html: Fach-Auswahl an den Button-Link koppeln =====
 document.addEventListener("DOMContentLoaded", function () {
 
-    // --- Teil 1: Startseite ---
+    // --- Teil 1: Startseite: Button-Link setzen ---
     const subjectSelect = document.getElementById("subject-select");
     const startButton = document.getElementById("start-browser");
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
             unterschriftElement.textContent = fachUnterschrift[fach];
         }
     } else if (titelElement) {
-        titelElement.textContent = "Browser";
+        titelElement.textContent = "GX Browser";
     }
 
 });
