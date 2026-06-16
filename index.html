@@ -1,323 +1,43 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="de">
+<html lang="de">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" content="#fff">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>schulhelfer2-0.onrender.com</title>
-    <style>
-        body {
-            font-family: Roboto, sans-serif;
-            font-size: 75%;
-            background: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .interstitial-wrapper {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        .icon-generic {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 20px;
-            background: #f1f3f4;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-            user-select: none;
-        }
-        .icon-generic::before {
-            content: "⚠️";
-            font-size: 36px;
-        }
-        /* Pixel-Gesicht in der oberen linken Ecke */
-        .pixel-face {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            z-index: 9999;
-            image-rendering: pixelated;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-        .pixel-face:hover {
-            opacity: 1;
-        }
-        h1 {
-            font-size: 24px;
-            font-weight: 400;
-            color: #202124;
-            margin: 0 0 10px 0;
-        }
-        p {
-            font-size: 14px;
-            color: #5f6368;
-            margin: 0 0 20px 0;
-        }
-        strong {
-            color: #202124;
-            font-weight: 500;
-        }
-        .error-code {
-            font-size: 12px;
-            color: #9aa0a6;
-            margin-top: 20px;
-        }
-        ul {
-            text-align: left;
-            display: inline-block;
-            margin: 0 auto;
-            padding: 0;
-            list-style-position: inside;
-            color: #5f6368;
-            font-size: 13px;
-        }
-        li {
-            margin: 8px 0;
-        }
-        a {
-            color: #1a73e8;
-            text-decoration: none;
-        }
-        button {
-            background: #1a73e8;
-            color: #fff;
-            border: none;
-            padding: 8px 24px;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            margin: 10px 5px;
-        }
-        button:hover {
-            background: #1557b0;
-        }
-        .secondary-button {
-            background: transparent;
-            color: #1a73e8;
-            border: 1px solid #dadce0;
-        }
-        .secondary-button:hover {
-            background: #f1f3f4;
-        }
-        #details {
-            display: none;
-            text-align: left;
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #5f6368;
-        }
-        .suggestions {
-            margin-bottom: 15px;
-        }
-        .suggestion-header {
-            font-weight: 500;
-            color: #202124;
-            margin-bottom: 4px;
-        }
-        .suggestion-body {
-            font-size: 11px;
-        }
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #202124;
-            }
-            h1 {
-                color: #e8eaed;
-            }
-            p, li, .suggestion-body, .error-code {
-                color: #9aa0a6;
-            }
-            strong {
-                color: #e8eaed;
-            }
-            .icon-generic {
-                background: #303134;
-            }
-            button {
-                background: #8ab4f8;
-                color: #202124;
-            }
-            button:hover {
-                background: #aecbfa;
-            }
-            .secondary-button {
-                background: transparent;
-                color: #8ab4f8;
-                border-color: #5f6368;
-            }
-            .secondary-button:hover {
-                background: #303134;
-            }
-            #details {
-                background: #303134;
-            }
-            .suggestion-header {
-                color: #e8eaed;
-            }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moerser-Karl-GX-Browser</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- PIXEL-GESICHT OBEN LINKS -->
-    <canvas class="pixel-face" id="pixelFace" width="32" height="32"></canvas>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Moerser-Karl-GX-Browser Logo" class="logo-img">
+        </div>
 
-    <div id="content">
-        <div id="main-frame-error" class="interstitial-wrapper">
-            <div id="main-content">
-                <div class="icon icon-generic"></div>
-                <div id="main-message">
-                    <h1>
-                        <span>Die Website ist nicht erreichbar</span>
-                    </h1>
-                    <p>Die Server-IP-Adresse von <strong>schulhelfer2-0.onrender.com</strong> wurde nicht gefunden.</p>
-                    <div id="suggestions-list">
-                        <p>Versuche Folgendes:</p>
-                        <ul>
-                            <li>Verbindung prüfen</li>
-                            <li><a href="#" onclick="document.getElementById('details').style.display='block';return false;">Proxy, Firewall und DNS-Konfiguration prüfen</a></li>
-                            <li><a id="diagnose-link" href="#">Verbindungsdiagnose ausführen</a></li>
-                        </ul>
-                    </div>
-                    <div class="error-code">ERR_NAME_NOT_RESOLVED</div>
-                </div>
-            </div>
-            <div id="buttons" class="nav-wrapper suggested-right">
-                <div id="control-buttons">
-                    <button id="reload-button" class="blue-button text-button" onclick="location.reload()">
-                        Neu laden
-                    </button>
-                </div>
-                <button id="details-button" class="secondary-button text-button small-link" onclick="document.getElementById('details').style.display='block'">
-                    Details
-                </button>
-            </div>
-            <div id="details">
-                <div class="suggestions">
-                    <div class="suggestion-header">Bitte überprüfe deine Internetverbindung.</div>
-                    <div class="suggestion-body">Überprüfe alle Kabel und starte alle verwendeten Router, Modems und anderen Netzwerkgeräte neu.</div>
-                </div>
-                <div class="suggestions">
-                    <div class="suggestion-header">Überprüfe die DNS-Einstellungen.</div>
-                    <div class="suggestion-body">Wenn du weitere Informationen dazu benötigst, kann dir dein Netzwerkadministrator weiterhelfen.</div>
-                </div>
-                <div class="suggestions">
-                    <div class="suggestion-header">Deaktiviere die Netzwerkvorhersage.</div>
-                    <div class="suggestion-body">Öffne das Chrome-Menü &gt; Einstellungen &gt; Erweiterte Einstellungen anzeigen und deaktiviere "Vorhersagefunktion zum schnelleren Laden von Seiten verwenden".</div>
-                </div>
-                <div class="suggestions">
-                    <div class="suggestion-header">Erlaube Chrome in deinen Firewall- und Virenschutzeinstellungen den Zugriff auf das Netzwerk.</div>
-                    <div class="suggestion-body">Falls das Programm schon in der Liste mit erlaubtem Netzwerkzugriff eingetragen ist, entferne es aus der Liste und füge es noch einmal hinzu.</div>
-                </div>
-                <div class="suggestions">
-                    <div class="suggestion-header">Falls du einen Proxyserver verwendest…</div>
-                    <div class="suggestion-body">Du kannst alle für eine Verbindung konfigurierten Proxys auf der Seite „Einstellungen“ deaktivieren.</div>
-                </div>
-            </div>
+        <h1 class="title">Moerser-Karl-GX-Browser</h1>
+        <p class="subtitle">Dein Schulbrowser für alle Fächer</p>
+
+        <!-- Fach-Auswahl -->
+        <div class="subject-selection">
+            <label for="subject-select">Fach wählen:</label>
+            <select id="subject-select">
+                <option value="mathe">Mathe</option>
+                <option value="deutsch">Deutsch</option>
+                <option value="englisch">Englisch</option>
+                <option value="geschichte">Geschichte</option>
+                <option value="biologie">Biologie</option>
+                <option value="physik">Physik</option>
+                <option value="chemie">Chemie</option>
+                <option value="turnen">Turnen</option>
+                <option value="soz">Soz</option>
+                <option value="freistunde">Freistunde</option>
+                <option value="digitale-grundbildung">Digitale Grundbildung</option>
+                <option value="musik">Musik</option>
+            </select>
         </div>
-        <div id="sub-frame-error">
-            <div class="icon"></div>
-            <div id="sub-frame-error-details">Die Server-IP-Adresse von <strong>schulhelfer2-0.onrender.com</strong> wurde nicht gefunden.</div>
-        </div>
+
+        <!-- Start-Button -->
+        <a id="start-browser" href="#" class="start-button">Moerser-Karl-GX-Browser starten</a>
     </div>
 
-    <script>
-        // ========== PIXEL-GESICHT ZEICHNEN ==========
-        const canvas = document.getElementById('pixelFace');
-        const ctx = canvas.getContext('2d');
-        
-        // Pixel-Gesicht (8x8 hochskaliert auf 32x32)
-        const face = [
-            [0,0,0,0,0,0,0,0],
-            [0,0,1,0,0,1,0,0],  // Augen
-            [0,0,1,0,0,1,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,1,1,1,1,0,0],  // Mund
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0]
-        ];
-        
-        const pixelSize = 4;
-        for (let y = 0; y < 8; y++) {
-            for (let x = 0; x < 8; x++) {
-                ctx.fillStyle = face[y][x] === 1 ? '#1a73e8' : 'transparent';
-                ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
-            }
-        }
-        
-        // ========== GEHEIMZUGANG: 5x auf Pixel-Gesicht klicken ==========
-        let pixelClicks = 0;
-        canvas.addEventListener('click', function(e) {
-            e.stopPropagation();
-            pixelClicks++;
-            
-            // Visuelles Feedback: Gesicht blinkt kurz
-            canvas.style.opacity = '0.3';
-            setTimeout(() => { canvas.style.opacity = '0.8'; }, 150);
-            
-            if (pixelClicks >= 5) {
-                openBrowser();
-            }
-        });
-        
-        // ========== ZUSÄTZLICHE GEHEIMZUGÄNGE ==========
-        // 5x auf das Warnsymbol klicken
-        let iconClicks = 0;
-        document.querySelector('.icon-generic').addEventListener('click', function(e) {
-            e.stopPropagation();
-            iconClicks++;
-            if (iconClicks >= 5) openBrowser();
-        });
-        
-        // Konami-Code
-        let keys = [];
-        document.addEventListener('keydown', function(e) {
-            keys.push(e.key);
-            keys = keys.slice(-8);
-            if (keys.join(',') === 'ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight') {
-                openBrowser();
-            }
-        });
-        
-        // "moerser" tippen
-        let typed = '';
-        document.addEventListener('keypress', function(e) {
-            typed += e.key.toLowerCase();
-            if (typed.includes('moerser')) {
-                typed = '';
-                openBrowser();
-            }
-            if (typed.length > 20) typed = typed.slice(-10);
-        });
-        
-        // ========== BROWSER ÖFFNEN ==========
-        function openBrowser() {
-            window.location.href = 'browser.html';
-        }
-        
-        // Diagnose-Link unterdrücken
-        document.getElementById('diagnose-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('details').style.display = 'block';
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
