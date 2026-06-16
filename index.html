@@ -3,21 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moerser-Karl-GX-Browser</title>
+    <title>Schulhelfer 2.0</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://www.opera.com/favicon.ico">
 </head>
 <body>
     <div class="container">
+        <!-- Opera GX Logo -->
         <div class="logo">
-            <img src="logo.png" alt="Moerser-Karl-GX-Browser Logo" class="logo-img">
+            <img src="https://www.opera.com/static/images/gx/gx-logo-white.843f9e0e5e1a.svg" alt="Opera GX Logo" class="logo-img">
         </div>
 
-        <h1 class="title">Moerser-Karl-GX-Browser</h1>
-        <p class="subtitle">Dein Schulbrowser für alle Fächer</p>
+        <h1 class="title">Opera GX</h1>
+        <p class="subtitle">Der Browser für Gamer</p>
 
-        <!-- Fach-Auswahl -->
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">🎮</span>
+                <span>CPU- & RAM-Limiter</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🎵</span>
+                <span>Integrierte Musik-Player</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🎨</span>
+                <span>RGB-Beleuchtung</span>
+            </div>
+        </div>
+
+        <!-- Fach-Auswahl (getarnt als "Erweiterungen" oder "Add-ons") -->
         <div class="subject-selection">
-            <label for="subject-select">Fach wählen:</label>
+            <label for="subject-select">Erweiterungen:</label>
             <select id="subject-select">
                 <option value="mathe">Mathe</option>
                 <option value="deutsch">Deutsch</option>
@@ -34,8 +51,10 @@
             </select>
         </div>
 
-        <!-- Start-Button -->
-        <a id="start-browser" href="#" class="start-button">Moerser-Karl-GX-Browser starten</a>
+        <!-- Download-Button (führt zu browser.html) -->
+        <a id="start-browser" href="#" class="download-button">Opera GX herunterladen</a>
+
+        <p class="version">Version 106.0.4998.28 – Early Bird</p>
     </div>
 
     <script src="script.js"></script>
