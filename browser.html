@@ -2,103 +2,23 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Schulhelfer 2.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moerser-Karl-GX-Browser</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- LAVA HINTERGRUND -->
-    <div class="lava-bg"></div>
+<body class="browser-body">
 
-    <!-- SIDEBAR -->
-    <aside id="sidebar">
-        <div class="sidebar-icon" title="Neuer Tab" onclick="addTab('about:blank', '🆕 Neuer Tab')">➕</div>
-        <div class="sidebar-icon" title="Cursor sperren (für Spiele)" onclick="lockCursor()">🎯</div>
-        <div class="sidebar-icon" id="gamesBtn" title="Games">🎮<div class="tooltip">Games</div></div>
-        <div class="sidebar-icon" id="socialBtn" title="Social">👥<div class="tooltip">Social</div></div>
-        <div class="sidebar-icon" id="streamingBtn" title="Streaming">📡<div class="tooltip">Streaming</div></div>
-        <div class="sidebar-icon" id="kiBtn" title="KI">🧠<div class="tooltip">KI</div></div>
-        <div class="sidebar-icon" id="toolsBtn" title="Tools">🛠️<div class="tooltip">Tools</div></div>
-        <div class="sidebar-icon" title="YouTube" onclick="addTab(PROXY+'https://www.youtube-nocookie.com/', '▶️ YouTube')">▶️</div>
-        <div class="sidebar-icon" title="Crunchyroll" onclick="addTab(PROXY+'https://www.crunchyroll.com/', '🍥 Crunchyroll')">🍥</div>
-        <div class="sidebar-icon" title="Roblox" onclick="addTab(PROXY+'https://now.gg/apps/roblox-corporation/7832/roblox.html', '🎮 Roblox')">🎮</div>
-        <div class="sidebar-icon" title="Spotify" onclick="addTab('https://open.spotify.com/', '🎵 Spotify')">🎵</div>
-        <div class="sidebar-icon" title="GitHub" onclick="addTab('https://github.com/', '🐙 GitHub')">🐙</div>
-        <div class="sidebar-icon" title="Wikipedia" onclick="addTab('https://www.wikipedia.org/', '📚 Wiki')">📚</div>
-    </aside>
-
-    <!-- GAMES POPUP -->
-    <div id="gamesPopup" class="popup">
-        <div class="popup-title">🎮 GAMES</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://now.gg/apps/roblox-corporation/7832/roblox.html', '🎮 Roblox');togglePopup('gamesPopup')">🎮 Roblox</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://desertorder.com/', '🏜️ Desert Order');togglePopup('gamesPopup')">🏜️ Desert Order</div>
-        <div class="popup-item" onclick="addTab('https://bloxd.io/', '🎮 Bloxd.io');togglePopup('gamesPopup')">🎮 Bloxd.io</div>
-        <div class="popup-item" onclick="addTab('https://orteil.dashnet.org/cookieclicker/', '🍪 Cookie Clicker');togglePopup('gamesPopup')">🍪 Cookie Clicker</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://1v1.lol/', '🔫 1v1.LOL');togglePopup('gamesPopup')">🔫 1v1.LOL</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://krunker.io/', '🎯 Krunker');togglePopup('gamesPopup')">🎯 Krunker</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://slope.game/', '⛷️ Slope');togglePopup('gamesPopup')">⛷️ Slope</div>
+    <!-- Top-Bar -->
+    <div class="top-bar">
+        <span id="fach-titel">Browser</span>
+        <a href="index.html" class="home-button">🏠 Startseite</a>
     </div>
 
-    <!-- SOCIAL POPUP -->
-    <div id="socialPopup" class="popup">
-        <div class="popup-title">👥 SOCIAL</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.tiktok.com/', '📱 TikTok');togglePopup('socialPopup')">📱 TikTok</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.instagram.com/', '📷 Instagram');togglePopup('socialPopup')">📷 Instagram</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.reddit.com/', '🤖 Reddit');togglePopup('socialPopup')">🤖 Reddit</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.twitter.com/', '🐦 Twitter/X');togglePopup('socialPopup')">🐦 Twitter/X</div>
+    <!-- Hauptbereich -->
+    <div class="browser-content">
+        <h2 id="fach-unterschrift">Willkommen</h2>
+        <p>Hier entstehen die Fach-Inhalte.</p>
     </div>
-
-    <!-- STREAMING POPUP -->
-    <div id="streamingPopup" class="popup">
-        <div class="popup-title">📡 STREAMING</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.youtube-nocookie.com/', '▶️ YouTube');togglePopup('streamingPopup')">▶️ YouTube</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.twitch.tv/', '📺 Twitch');togglePopup('streamingPopup')">📺 Twitch</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.netflix.com/', '🎬 Netflix');togglePopup('streamingPopup')">🎬 Netflix</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.disneyplus.com/', '🏰 Disney+');togglePopup('streamingPopup')">🏰 Disney+</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://www.crunchyroll.com/', '🍥 Crunchyroll');togglePopup('streamingPopup')">🍥 Crunchyroll</div>
-    </div>
-
-    <!-- KI POPUP -->
-    <div id="kiPopup" class="popup">
-        <div class="popup-title">🧠 KÜNSTLICHE INTELLIGENZ</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://chat.openai.com/', '🤖 ChatGPT');togglePopup('kiPopup')">🤖 ChatGPT</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://claude.ai/', '🧪 Claude');togglePopup('kiPopup')">🧪 Claude</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://chat.deepseek.com/', '🧠 DeepSeek');togglePopup('kiPopup')">🧠 DeepSeek</div>
-        <div class="popup-item" onclick="addTab(PROXY+'https://perplexity.ai/', '🔍 Perplexity');togglePopup('kiPopup')">🔍 Perplexity</div>
-    </div>
-
-    <!-- TOOLS POPUP -->
-    <div id="toolsPopup" class="popup">
-        <div class="popup-title">🛠️ TOOLS</div>
-        <div class="popup-item" onclick="addTab('https://docs.google.com/', '📄 Google Docs');togglePopup('toolsPopup')">📄 Google Docs</div>
-        <div class="popup-item" onclick="addTab('https://slides.google.com/', '📊 Google Slides');togglePopup('toolsPopup')">📊 Google Slides</div>
-        <div class="popup-item" onclick="addTab('https://www.canva.com/', '🎨 Canva');togglePopup('toolsPopup')">🎨 Canva</div>
-        <div class="popup-item" onclick="addTab('https://www.photopea.com/', '🖼️ Photopea');togglePopup('toolsPopup')">🖼️ Photopea</div>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="mainContent">
-        <div id="topBar">
-            <span id="logo">📚 Schulhelfer 2.0</span>
-            <input type="text" id="urlInput" placeholder="🔍 URL oder Suche..." autofocus>
-            <button id="feuerBtn">🎯 Suche</button>
-        </div>
-        <div id="tabs">
-            <div class="tab" id="newTabBtn" onclick="addTab('about:blank', '🆕 Neuer Tab')" style="background:transparent;border:1px dashed #444;color:#888;font-size:18px;padding:6px 12px;" title="Neuer Tab">＋</div>
-        </div>
-        <div id="framesContainer">
-            <div id="startPage">
-                <div id="startLogo">MÖRSER-KARL</div>
-                <div id="startSub">GX EDITION</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- STATUSLEISTE -->
-    <footer id="statusBar">
-        <div class="status-item"><span class="status-dot"></span> Geschützt</div>
-        <div class="status-item">🔒 Proxy aktiv</div>
-        <div class="status-item" id="tabCount">0 Tabs</div>
-    </footer>
 
     <script src="script.js"></script>
 </body>
